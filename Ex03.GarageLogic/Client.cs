@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
 
         public string GetLicensePlate()
         {
-            return m_clientVehicle.
+            return m_clientVehicle.LicensePlate;
         }
     }
 }
