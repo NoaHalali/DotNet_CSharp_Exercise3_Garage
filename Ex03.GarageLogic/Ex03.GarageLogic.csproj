@@ -40,9 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="eCarColor.cs" />
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricMotorcycle.cs" />
     <Compile Include="ElectricVehicle.cs" />
+    <Compile Include="eMotorcycleLicenseType.cs" />
+    <Compile Include="eCarNumberOfDoors.cs" />
     <Compile Include="FuelCar.cs" />
     <Compile Include="FuelMotorcycle.cs" />
     <Compile Include="FuelVehicle.cs" />

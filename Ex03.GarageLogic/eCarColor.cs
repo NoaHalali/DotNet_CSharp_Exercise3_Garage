@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class ElectricCar : ElectricVehicle
+    public enum eCarColor
     {
-        eCarColor m_Color;
-
+        Yello,
+        White,
+        Red,
+        Black
     }
 }
