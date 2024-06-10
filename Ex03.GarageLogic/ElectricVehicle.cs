@@ -8,5 +8,14 @@ namespace Ex03.GarageLogic
 {
     internal abstract class ElectricVehicle : Vehicle
     {
+        private float m_BatteryTimeLeft;
+        private float m_MaxBatteryTime;
+
+
+
+        public void BatteryCharger(int i_HoursToCharge)
+        {
+        }
+
     }
 }

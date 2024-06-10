@@ -10,7 +10,11 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
+            GarageUI userInterface = new GarageUI();
 
+            userInterface.RunSystem();
+
+            Console.ReadLine();
         }
     }
 }
