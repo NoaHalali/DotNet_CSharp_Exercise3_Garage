@@ -11,5 +11,17 @@ namespace Ex03.GarageLogic
         private string m_ManufacturerName;
         float m_CurrentAirPressure;
         float m_MaxAirPressure;
+
+        public void AddAir(float i_AirToAdd)
+        {
+            if (i_AirToAdd >= 0 && m_CurrentAirPressure + i_AirToAdd <= m_MaxAirPressure)
+            {
+                m_CurrentAirPressure += i_AirToAdd;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0);
+            }
+        }
     }
 }

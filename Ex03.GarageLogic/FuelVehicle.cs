@@ -8,20 +8,27 @@ namespace Ex03.GarageLogic
 {
     internal abstract class FuelVehicle : Vehicle
     {
-        public enum eFuelType
-        {
-            Octan95,
-            Octan96,
-            Octan98,
-            Soler,
-        }
-
-        private float m_FuelAmount;
+        private eFuelType m_FuelType;
+        private float m_CurrentFuelAmount;
         private float m_MaxFuelAmount;
 
-        protected void FuelCharging(int i_FuelAmountLiter, eFuelType i_FuelType)
+        protected void FuelCharging(int i_FuelToAdd, eFuelType i_FuelType)
         {
-
+            if (m_FuelType == i_FuelType)
+            {
+                if (i_FuelToAdd >= 0 && m_CurrentFuelAmount + i_FuelToAdd <= m_MaxFuelAmount)
+                {
+                    m_CurrentFuelAmount += i_FuelToAdd;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(m_MaxFuelAmount - m_CurrentFuelAmount, 0);
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Wrong Fuel Type");
+            }
         }
 
     }

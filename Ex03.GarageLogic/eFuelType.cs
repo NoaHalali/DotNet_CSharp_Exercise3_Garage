@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Truck : FuelVehicle
+    internal enum eFuelType
     {
-        private bool m_IsCarryDangarousMaterials;
-        private float m_CargoVolume;
-
+        Octan95,
+        Octan96,
+        Octan98,
+        Soler,
     }
 }
