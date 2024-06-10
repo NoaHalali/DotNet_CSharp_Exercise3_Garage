@@ -8,12 +8,49 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleFactory
     {
-        private enum eVehicleType
+        public enum eVehicleType
         {
-            //TO DO
+            Motorcycle,
+            ElectricMotorcycle,
+            Car,
+            ElectricCar,
+            Truck,
         }
 
-        //Todo switch case for creating new object and return it.
+        public Vehicle CreateNewVehicle(eVehicleType i_TypeToCreate)
+        {
+            Vehicle newVehicle;
 
+            switch (i_TypeToCreate)
+            {
+                case eVehicleType.Motorcycle:
+                    {
+                        newVehicle = new FuelMotorcycle();
+                        break;
+                    }
+                case eVehicleType.ElectricMotorcycle:
+                    {
+                        newVehicle = new ElectricMotorcycle();
+                        break;
+                    }
+                case eVehicleType.Car:
+                    {
+                        newVehicle = new FuelCar();
+                        break;
+                    }
+                case eVehicleType.ElectricCar:
+                    {
+                        newVehicle = new ElectricCar();
+                        break;
+                    }
+                default: // Equal to case eVehicleType.Truck:
+                    {
+                        newVehicle = new Truck();
+                        break;
+                    }
+            }
+
+            return newVehicle;
+        }
     }
 }
