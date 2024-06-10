@@ -10,13 +10,13 @@ namespace Ex03.ConsoleUI
 {
     internal class GarageUI
     {
-        private Garage m_GarageData;
+        private Garage m_GarageEngine;
 
 
         public void RunSystem()
         {
 
-            while (true) 
+            while (true) // change to IsProgramRunning.
             {
                 printMenu();
                 getOptionFromUser();
@@ -26,8 +26,6 @@ namespace Ex03.ConsoleUI
 
 
         }
-
-
 
         private void printMenu()
         {
@@ -52,17 +50,21 @@ namespace Ex03.ConsoleUI
             return 0;
         }
 
-        private void func(eClientAction num)
+        private void activateAction(eClientAction num)
         {
             switch (num)
             {
+                case eClientAction.InsertNewVehicle:
+                    {
+                        m_GarageEngine.InsertNewVehicleToGarage();
+                        break;
+                    }
                 case eClientAction.something:
                     {
 
                         break;
                     }
             }
-
         }
     }
 }
