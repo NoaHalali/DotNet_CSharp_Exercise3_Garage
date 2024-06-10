@@ -8,11 +8,51 @@ namespace Ex03.GarageLogic
 {
     internal struct Client
     {
-        private Vehicle m_MyVehice;
+        private Vehicle m_clientVehicle;
         private string m_OwnerName;
         private string m_OwnerPhoneNum;
         private eVehicleGarageState m_State;
 
-        //TO DO- propeties
+        public Vehicle ClientVehicle
+        {
+            get
+            {
+                return m_clientVehicle;
+            }
+        }
+
+        public string OwnerName
+        {
+            get
+            {
+                return m_OwnerName;
+            }
+        }
+
+        public string OwnerPhoneNum
+        {
+            get
+            {
+                return m_OwnerPhoneNum;
+            }
+        }
+
+        public eVehicleGarageState State
+        {
+            get
+            {
+                return m_State;
+            }
+
+            set
+            {
+                m_State = value;
+            }
+        }
+
+        public string GetLicensePlate()
+        {
+            return m_clientVehicle.
+        }
     }
 }

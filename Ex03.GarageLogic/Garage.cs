@@ -10,8 +10,28 @@ namespace Ex03.GarageLogic
     {
         private List<Client> clients;
 
-        public void InsertNewVehicleToGarage()
+        public void InsertNewVehicleToGarage(string i_LicensePlate)
         {
+            bool existingClient = tryFindClient(i_LicensePlate, out Client client);
+
+            if(existingClient)
+            {
+                client.State = eVehicleGarageState.InRepair;
+            }
+            else
+            {
+                chooseVehicleType();
+
+            }
+        }
+        private bool tryFindClient(string i_LicensePlate, out Client o_Client)
+        {
+            foreach(Client client in clients) 
+            {
+                if(client.GetLicensePlate() == i_LicensePlate)
+                    
+       
+            }
 
         }
 
