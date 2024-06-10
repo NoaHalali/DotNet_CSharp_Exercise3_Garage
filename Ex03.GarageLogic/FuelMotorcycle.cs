@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     internal class FuelMotorcycle : FuelVehicle
     {
-        private eLicenseType m_LicenseType;
+        private eMotorcycleLicenseType m_LicenseType;
         private int m_EngineVolume;
 
 

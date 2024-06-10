@@ -8,8 +8,8 @@ namespace Ex03.GarageLogic
 {
     internal class FuelCar : FuelVehicle
     {
-        private eColor m_Color;
-        private eDoorsAmount m_DoorsAmount;
+        private eCarColor m_Color;
+        private eCarNumberOfDoors m_DoorsAmount;
 
 
 
