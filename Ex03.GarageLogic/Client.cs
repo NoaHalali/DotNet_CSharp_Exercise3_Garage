@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    //maybe change to class
     internal struct Client
     {
         private Vehicle m_MyVehice;
