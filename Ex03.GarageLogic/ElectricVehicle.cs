@@ -11,28 +11,28 @@ namespace Ex03.GarageLogic
         private float m_BatteryTimeLeft;
         private float m_MaxBatteryTime;
 
-        public void BatteryCharger(int i_HoursToCharge, string o_ErrorMessage)
+        public void BatteryCharger(int i_HoursToCharge)
         {
-            bool isValid = checkIfValidInput(i_HoursToCharge, o_ErrorMessage);
+            bool isValid = checkIfValidInput(i_HoursToCharge);
 
             if (isValid)
             {
                 m_BatteryTimeLeft += i_HoursToCharge;
             }
+
+            else
+            {
+                float maxBatteryPossibleToAdd = m_MaxBatteryTime - m_BatteryTimeLeft;
+                throw new ValueOutOfRangeException(maxBatteryPossibleToAdd, 0);
+            }
         }
 
-        private bool checkIfValidInput(int i_HoursToCharge, string o_ErrorMessage)
+        private bool checkIfValidInput(int i_HoursToCharge)
         {
             bool isValid;
             float newBatteryTime = m_BatteryTimeLeft + i_HoursToCharge;
-            float maxBatteryPossibleToAdd = m_MaxBatteryTime - m_BatteryTimeLeft; //maybe change name, its to current time
 
-            o_ErrorMessage = null;
             isValid = newBatteryTime <= m_MaxBatteryTime;
-            if (!isValid)
-            {
-                o_ErrorMessage = string.Format("Exeeded maximum hours, maximum to add for now is {0}", maxBatteryPossibleToAdd);
-            }
 
             return isValid;
         }

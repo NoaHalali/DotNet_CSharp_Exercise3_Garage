@@ -9,10 +9,22 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         private List<Client> clients;
+        private VehicleFactory m_Factory;
 
-        public void InsertNewVehicleToGarage()
+        public bool tryFindClient(string i_LicensePlate, out Client o_Client)
         {
+            foreach(Client client in clients) 
+            {
+                if (client.GetLicensePlate() == i_LicensePlate)
+                {
+                    o_Client = client;
+                    break;
+                }  
+            }
 
+            o_Client = new Client();
+
+            return false;
         }
 
         public List<string> GetLicensePlates()

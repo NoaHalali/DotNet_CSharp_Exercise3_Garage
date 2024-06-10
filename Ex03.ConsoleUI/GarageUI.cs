@@ -24,7 +24,6 @@ namespace Ex03.ConsoleUI
 
             }
 
-
         }
 
         private void printMenu()
@@ -56,7 +55,7 @@ namespace Ex03.ConsoleUI
             {
                 case eClientAction.InsertNewVehicle:
                     {
-                        m_GarageEngine.InsertNewVehicleToGarage();
+                        InsertNewVehicleToGarage();
                         break;
                     }
                 case eClientAction.something:
@@ -64,6 +63,24 @@ namespace Ex03.ConsoleUI
 
                         break;
                     }
+            }
+        }
+
+        public void InsertNewVehicleToGarage()
+        {
+            //getInputFromUser
+            string licensePlate;
+
+            bool existingClient = m_GarageEngine.tryFindClient(licensePlate, out Client client);
+
+            if (existingClient)
+            {
+                client.State = eVehicleGarageState.InRepair;
+            }
+            else
+            {
+                chooseVehicleType();
+
             }
         }
     }
