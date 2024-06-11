@@ -6,25 +6,20 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class VehicleFactory
+    public class VehicleFactory
     {
-        List<string> m_VehicleTypes;
-
-        public VehicleFactory()
+        public static List<string> GetVehicleTypes()
         {
-            m_VehicleTypes.Add("Motorcycle");
-            m_VehicleTypes.Add("ElectricMotorcycle");
-            m_VehicleTypes.Add("Car");
-            m_VehicleTypes.Add("ElectricCar");
-            m_VehicleTypes.Add("Truck");
-        }
+            List<string> vehicleTypes = new List<string>
+            {
+                "Motorcycle",
+                "ElectricMotorcycle",
+                "Car",
+                "ElectricCar",
+                "Truck"
+            };
 
-        public List<string> VehicleTypes
-        {
-            get 
-            { 
-                return m_VehicleTypes;
-            }
+            return vehicleTypes;
         }
 
         public enum eVehicleType
@@ -36,7 +31,7 @@ namespace Ex03.GarageLogic
             Truck,
         }
 
-        public Vehicle CreateNewVehicle(eVehicleType i_TypeToCreate)
+        public static Vehicle CreateNewVehicle(eVehicleType i_TypeToCreate)
         {
             Vehicle newVehicle;
 

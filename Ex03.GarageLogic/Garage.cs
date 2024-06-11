@@ -10,9 +10,8 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         private List<Client> clients;
-        private VehicleFactory m_Factory = new VehicleFactory();
 
-        public bool IsClientAlreadyExists(string i_LicensePlate)
+        public bool IsVehicleAlreadyExistsAtGarage(string i_LicensePlate)
         {
             bool exists = false;
 
@@ -30,7 +29,7 @@ namespace Ex03.GarageLogic
 
         public List<string> GetLicensePlatesList()
         {
-            List<string> licensePlatesList = new List<string>() ;
+            List<string> licensePlatesList = new List<string>();
             string licenstePlate;
 
             foreach (Client client in clients)
@@ -44,14 +43,14 @@ namespace Ex03.GarageLogic
 
         public List<string> GetLicensePlatesListByGarageState(eVehicleGarageState i_GarageState)
         {
-            List<string> licensePlatesList = new List<string>() ;
+            List<string> licensePlatesList = new List<string>();
             string licenstePlate;
 
             foreach (Client client in clients)
             {
-                licenstePlate = client.GetLicensePlate();
                 if (client.GarageState == i_GarageState)
                 {
+                    licenstePlate = client.GetLicensePlate();
                     licensePlatesList.Add(licenstePlate);
                 }
             }
@@ -88,10 +87,6 @@ namespace Ex03.GarageLogic
         //}
 
 
-        public List<string> GetVehicleTypesOptions()
-        {
-            return m_Factory.VehicleTypes;
-        }
 
     }
 }

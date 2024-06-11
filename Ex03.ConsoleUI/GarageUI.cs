@@ -34,6 +34,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("6) Charge electric vehicle");
             Console.WriteLine("7) Display client's data");
         }
+
         private eUserAction getActionOptionFromUser()
         {
             const int k_MinOptionVal = 1;
@@ -44,6 +45,7 @@ namespace Ex03.ConsoleUI
 
             return (eUserAction)optionNumber;
         }
+
         private int getValidEnumOptionNumber(int i_MinVal, int i_MaxVal)
         {
             bool isValid = false;
@@ -60,6 +62,7 @@ namespace Ex03.ConsoleUI
 
             return optionNumber;
         }
+
         private bool isUserOptionANumber(string i_InputAsString, out int o_InputAsInteger)
         {
             bool isValid = int.TryParse(i_InputAsString, out o_InputAsInteger);
@@ -97,17 +100,17 @@ namespace Ex03.ConsoleUI
                     }
                 case eUserAction.DisplayLicensesPlatesList:
                     {
-                        displayLicensesPlatesList();
+                        displayLicensesPlatesList(); // Done
                         break;
                     }
                 case eUserAction.ChangeVehicleGarageState:
                     {
-                        changeVehicleGarageState();
+                        changeVehicleGarageState();  // Done
                         break;
                     }
                 case eUserAction.FillWheelsWithAir:
                     {
-                        fillWheelsWithAir();
+                        fillWheelsWithAir();         // Working
                         break;
                     }
                 case eUserAction.ChargeFuelVehicle:
@@ -130,8 +133,8 @@ namespace Ex03.ConsoleUI
 
         private void insertNewVehicleToGarage()
         {
-            string licensePlate = getLicenseFromUser();
-            bool existingClient = m_GarageEngine.IsClientAlreadyExists(licensePlate);
+            string licensePlate = getLicensePlateFromUser();
+            bool existingClient = m_GarageEngine.IsVehicleAlreadyExistsAtGarage(licensePlate);
 
             if (existingClient)
             {
@@ -146,7 +149,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private string getLicenseFromUser()
+        private string getLicensePlateFromUser()
         {
             Console.WriteLine("Please enter vehicle license plate:");
             string licensePlate = Console.ReadLine();
@@ -171,7 +174,7 @@ namespace Ex03.ConsoleUI
 
         private void printVehiclesOptions()
         {
-            List<string> vehicleOptions = m_GarageEngine.GetVehicleTypesOptions();
+            List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
 
             Console.WriteLine("Please enter the type of vehicle that will enter the garage:");
             foreach (string option in vehicleOptions)
@@ -182,7 +185,7 @@ namespace Ex03.ConsoleUI
 
         private bool IsVehicleTypeValid(string vehicleType)
         {
-            List<string> vehicleOptions = m_GarageEngine.GetVehicleTypesOptions();
+            List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
             bool isValid = false;
 
             foreach (string option in vehicleOptions)
@@ -223,6 +226,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("4) Paid");
        
         }
+
         private eGarageStateFilter getFilterOptionFromUser()
         {
             const int k_MinOptionVal = 1;
@@ -236,7 +240,7 @@ namespace Ex03.ConsoleUI
 
         private List<string> getLicensesPlatesListByFilterOption(eGarageStateFilter filter)
         {
-            List<string> LicensesPlatesList =null; //will alway be one of the cases here,
+            List<string> LicensesPlatesList = null; //will alway be one of the cases here,
                                                    //filter validation is being checked before
 
             switch(filter)
@@ -269,9 +273,20 @@ namespace Ex03.ConsoleUI
 
         private void changeVehicleGarageState()
         {
-            string licensePlate = getLicenseFromUser(); //change function to licenseplate
-            eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
+            bool isVehicleExitsAtGarage = false;
+            string licensePlate = null;
 
+            while (!isVehicleExitsAtGarage)
+            {
+                licensePlate = getLicensePlateFromUser();
+                isVehicleExitsAtGarage = m_GarageEngine.IsVehicleAlreadyExistsAtGarage(licensePlate);
+                if (!isVehicleExitsAtGarage)
+                {
+                    Console.WriteLine("Vehicle with this license plate not exists at the garage, try again.");
+                }
+            }
+
+            eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
             m_GarageEngine.ChangeVehicleState(licensePlate, newState);
         }
         
@@ -296,7 +311,7 @@ namespace Ex03.ConsoleUI
 
         private void fillWheelsWithAir()
         {
-            string licensePlate = getLicenseFromUser(); //change function to licenseplate
+            string licensePlate = getLicensePlateFromUser();
 
             m_GarageEngine.FillVehicleWheelsWithAir(licensePlate);
         }
