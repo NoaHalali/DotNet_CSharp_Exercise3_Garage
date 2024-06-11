@@ -28,22 +28,6 @@ namespace Ex03.GarageLogic
             return exists;
         }
 
-        //public bool TryFindClient(string i_LicensePlate, out Client o_Client)
-        //{
-        //    foreach(Client client in clients) 
-        //    {
-        //        if (client.GetLicensePlate() == i_LicensePlate)
-        //        {
-        //            o_Client = client;
-        //            break;
-        //        }  
-        //    }
-
-        //    o_Client = new Client();
-
-        //    return false;
-        //}
-
         public List<string> GetLicensePlatesList()
         {
             List<string> licensePlatesList = new List<string>() ;
@@ -80,7 +64,7 @@ namespace Ex03.GarageLogic
             {
                 if (client.GetLicensePlate() == i_LicensePlate)
                 {
-                    client.State = i_NewState;
+                    client.GarageState = i_NewState;
                     break;
                 }
             }

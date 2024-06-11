@@ -101,11 +101,6 @@ namespace Ex03.ConsoleUI
                         fillWheelsWithAir();
                         break;
                     }
-                //case eClientAction.ChargeVehicleEnergy:
-                //    {
-                //        chargeVehicleEnergy();
-                //        break;
-                //    }
                 case eClientAction.ChargeFuelVehicle:
                     {
                         chargeFuelVehicle();
