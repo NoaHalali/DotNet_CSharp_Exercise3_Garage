@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic
 {
-    public enum eCarNumberOfDoors
+    internal enum eCarNumberOfDoors
     {
         Two = 2,
         Three = 3,
