@@ -72,14 +72,20 @@ namespace Ex03.GarageLogic
 
         public void FillVehicleWheelsWithAir(string i_LicensePlate)
         {
-
+            foreach (Client client in clients)
+            {
+                if (client.GetLicensePlate() == i_LicensePlate)
+                {
+                    client.ClientVehicle
+                }
+            }
 
         }
 
-        //public void FillEnergy() 
-        //{
-        //    //vechicle class function, will be virtual and inheriters will override it
-        //}
+        public void FillEnergy()
+        {
+            //vechicle class function, will be virtual and inheriters will override it
+        }
 
         //public Client? GetClientData(string i_LicensePlate)
         //{

@@ -35,8 +35,8 @@ namespace Ex03.GarageLogic
             {
                 return m_EnergyPrecentage;
             }
-        } 
-        
+        }
+
         public List<Wheel> Wheels
         {
             get
@@ -45,8 +45,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-
-
+        public abstract void FillWheelsAirToMax();
 
     }
 }

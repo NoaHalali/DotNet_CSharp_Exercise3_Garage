@@ -12,6 +12,9 @@ namespace Ex03.GarageLogic
         private eCarNumberOfDoors m_DoorsAmount;
 
 
-
+        public override void FillWheelsAirToMax()
+        {
+            
+        }
     }
 }

@@ -11,5 +11,10 @@ namespace Ex03.GarageLogic
         private bool m_IsCarryDangarousMaterials;
         private float m_CargoVolume;
 
+
+        public override void FillWheelsAirToMax()
+        {
+            
+        }
     }
 }

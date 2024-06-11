@@ -273,6 +273,14 @@ namespace Ex03.ConsoleUI
 
         private void changeVehicleGarageState()
         {
+            string licensePlate = getLicensePlateOfExistsVehicle();
+            eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
+
+            m_GarageEngine.ChangeVehicleState(licensePlate, newState);
+        }
+        
+        private string getLicensePlateOfExistsVehicle()
+        {
             bool isVehicleExitsAtGarage = false;
             string licensePlate = null;
 
@@ -286,10 +294,9 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
-            m_GarageEngine.ChangeVehicleState(licensePlate, newState);
+            return licensePlate;
         }
-        
+
         private eVehicleGarageState getVehicleGarageStateOptionFromUser()
         {
             const int k_MinOptionVal = 1;
@@ -311,7 +318,7 @@ namespace Ex03.ConsoleUI
 
         private void fillWheelsWithAir()
         {
-            string licensePlate = getLicensePlateFromUser();
+            string licensePlate = getLicensePlateOfExistsVehicle();
 
             m_GarageEngine.FillVehicleWheelsWithAir(licensePlate);
         }

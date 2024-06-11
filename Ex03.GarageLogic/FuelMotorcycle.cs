@@ -11,7 +11,14 @@ namespace Ex03.GarageLogic
         private eMotorcycleLicenseType m_LicenseType;
         private int m_EngineVolume;
 
+        public FuelMotorcycle()
+        {
+            
+        }
 
-
+        public override void FillWheelsAirToMax()
+        {
+            
+        }
     }
 }
