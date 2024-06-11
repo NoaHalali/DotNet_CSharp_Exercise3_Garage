@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleState()
         {
-
+            client.State = eVehicleGarageState.InRepair;
         }
 
         public void FillWheelsWithAir()

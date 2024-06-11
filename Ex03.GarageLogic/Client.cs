@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal struct Client
+    public struct Client
     {
-        private Vehicle m_clientVehicle;
+        private Vehicle m_ClientVehicle;
         private string m_OwnerName;
         private string m_OwnerPhoneNum;
         private eVehicleGarageState m_State;
@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_clientVehicle;
+                return m_ClientVehicle;
             }
         }
 
