@@ -11,23 +11,11 @@ namespace Ex03.ConsoleUI
     internal class GarageUI
     {
         private Garage m_GarageEngine;
-
-        private enum eClientAction
-        {
-            InsertNewVehicle = 1,
-            PrintVehiclesLicense = 2,
-            ChangeVehicleState = 3,
-            AddAirToVehicle = 4,
-            AddFuelToVehicle = 5,
-            AddElectricityToVehicle = 6,
-            PrintFullDetails = 7,
-        }
+        private bool m_ProgramStillRunning = true;
 
         public void RunSystem()
         {
-            bool IsProgramRunning = true;
-
-            while (IsProgramRunning)
+            while (m_ProgramStillRunning)
             {
                 printMenu();
                 eClientAction clientOption = getOptionFromUser();
@@ -39,17 +27,15 @@ namespace Ex03.ConsoleUI
 
         private void printMenu()
         {
-            Console.WriteLine("Welcome to the Garage!");
-            Console.WriteLine("Pick one of the options below by thier number:");
-            Console.WriteLine("1. Enter new vehicle to the garage.");
-            Console.WriteLine("2. Print list of vehicles licenses at the garage.");
-            Console.WriteLine("3. Change vehicle state at the garage");
-            Console.WriteLine("4. Add air to wheels of a vehicle.");
-            Console.WriteLine("5. Add fuel to a vehicle powered by fuel.");
-            Console.WriteLine("6. Add electricity to a vehicle powered by electricity.");
-            Console.WriteLine("7. Print full details of a vehicle.");
+            Console.WriteLine("Choose a number of action to perform:");
+            Console.WriteLine("1) Insert new vehicle to the garage");
+            Console.WriteLine("2) Display all license plates in the garage system");
+            Console.WriteLine("3) Change vehicle garage state");
+            Console.WriteLine("4) Fill vehicle wheels with maximum air");
+            Console.WriteLine("5) Charge fuel vehicle");
+            Console.WriteLine("6) Charge electric vehicle");
+            Console.WriteLine("7) Display client's data");
         }
-
         private eClientAction getOptionFromUser()
         {
             bool isValid = false;
@@ -87,39 +73,52 @@ namespace Ex03.ConsoleUI
             }
 
             return isValid;
+
         }
 
-        private void activateAction(eClientAction i_ClientAction)
+        private void activateAction(eClientAction i_ActionNumber)
         {
-            switch (i_ClientAction)
+
+            switch (i_ActionNumber)
             {
                 case eClientAction.InsertNewVehicle:
                     {
                         insertNewVehicleToGarage();
                         break;
                     }
-                case eClientAction.PrintVehiclesLicense:
+                case eClientAction.DisplayLicensesPlatesList:
                     {
+                        displayLicensesPlatesList();
                         break;
                     }
-                case eClientAction.ChangeVehicleState:
+                case eClientAction.ChangeVehicleGarageState:
                     {
+                        changeVehicleGarageState();
                         break;
                     }
-                case eClientAction.AddAirToVehicle:
+                case eClientAction.FillWheelsWithAir:
                     {
+                        fillWheelsWithAir();
                         break;
                     }
-                case eClientAction.AddFuelToVehicle:
+                //case eClientAction.ChargeVehicleEnergy:
+                //    {
+                //        chargeVehicleEnergy();
+                //        break;
+                //    }
+                case eClientAction.ChargeFuelVehicle:
                     {
+                        chargeFuelVehicle();
                         break;
                     }
-                case eClientAction.AddElectricityToVehicle:
+                case eClientAction.ChargeElectricVehicle:
                     {
+                        chargeElectricVehicle();
                         break;
                     }
-                case eClientAction.PrintFullDetails:
+                case eClientAction.DisplayClientData:
                     {
+                        displayClientData();
                         break;
                     }
             }
@@ -129,7 +128,6 @@ namespace Ex03.ConsoleUI
         {
             string licensePlate = getLicenseFromUser();
             bool existingClient = m_GarageEngine.IsClientAlreadyExists(licensePlate);
-            //bool existingClient = m_GarageEngine.tryFindClient(licensePlate, out Client client);
 
             if (existingClient)
             {
@@ -155,5 +153,85 @@ namespace Ex03.ConsoleUI
         {
 
         }
+
+        private void displayLicensesPlatesList()
+        {
+            List<string> LicensesPlatesList;
+            eFilterOption filter = chooseFilterOption();
+
+            LicensesPlatesList = getLicensesPlatesListByFilterOption(filter);
+            foreach (string licensePlate in LicensesPlatesList)
+            {
+                Console.WriteLine(licensePlate);
+            }
+        }
+
+        private eFilterOption chooseFilterOption()
+        {
+            eFilterOption filter; 
+
+            printFilterOptions();
+            filter = getFilterOptionFromUser();
+
+            return filter;
+        }
+
+
+        private void printFilterOptions()
+        {
+            Console.WriteLine("Choose filter option:");
+            Console.WriteLine("1) All");
+            Console.WriteLine("2) InRepair");
+            Console.WriteLine("3) Repaired");
+            Console.WriteLine("4) Paid");
+            Console.ReadLine();
+        }
+        private eFilterOption getFilterOptionFromUser()
+        {
+            //no need to check the validation?
+            int optionNumber = int.Parse(Console.ReadLine()); // TryParse + in range of the enum.
+            eFilterOption filter = (eFilterOption)optionNumber;
+
+            return filter;
+        }
+
+        private List<string> getLicensesPlatesListByFilterOption(eFilterOption filter)
+        {
+            List<string> LicensesPlatesList =null; //will alway be one of the cases here,
+                                                   //filter validation is being checked before
+
+            switch(filter)
+            {
+                case eFilterOption.All:
+                    {
+                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesList();
+                        break;
+                    }
+                case eFilterOption.InRepair:
+                    {
+                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.InRepair);
+                        break;
+                    }
+                case eFilterOption.Repaired:
+                    {
+                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.Repaired);
+                        break;
+                    }
+                case eFilterOption.Paid:
+                    {
+                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.Paid);
+                        break;
+                    }
+                    //deafult: check validation????
+            }
+
+            return LicensesPlatesList;
+        }
+
+        private void changeVehicleGarageState()
+        {
+
+        }   
+
     }
 }

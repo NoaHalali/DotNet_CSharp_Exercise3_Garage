@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal abstract class Vehicle
+    public abstract class Vehicle
     {
         private string m_Model;
         private string m_LicensePlate;

@@ -44,9 +44,34 @@ namespace Ex03.GarageLogic
         //    return false;
         //}
 
-        public List<string> GetLicensePlates()
+        public List<string> GetLicensePlatesList()
         {
-            return null;
+            List<string> licensePlatesList = new List<string>() ;
+            string licenstePlate;
+
+            foreach (Client client in clients)
+            {
+                licenstePlate = client.GetLicensePlate();
+                licensePlatesList.Add(licenstePlate);
+            }
+
+            return licensePlatesList;
+        }
+        public List<string> GetLicensePlatesListByGarageState(eVehicleGarageState i_GarageState)
+        {
+            List<string> licensePlatesList = new List<string>() ;
+            string licenstePlate;
+
+            foreach (Client client in clients)
+            {
+                licenstePlate = client.GetLicensePlate();
+                if (client.GarageState == i_GarageState)
+                {
+                    licensePlatesList.Add(licenstePlate);
+                }
+            }
+
+            return licensePlatesList;
         }
 
         public void ChangeVehicleState(string i_LicensePlate, eVehicleGarageState i_NewState)
@@ -66,10 +91,10 @@ namespace Ex03.GarageLogic
 
         }
 
-        public void FillEnergy() 
-        {
-            //vechicle class function, will be virtual and inheriters will override it
-        }
+        //public void FillEnergy() 
+        //{
+        //    //vechicle class function, will be virtual and inheriters will override it
+        //}
 
         //public Client? GetClientData(string i_LicensePlate)
         //{
