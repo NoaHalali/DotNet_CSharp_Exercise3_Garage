@@ -70,8 +70,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FillWheelsWithAir()
+        public void FillVehicleWheelsWithAir(string i_LicensePlate)
         {
+
 
         }
 

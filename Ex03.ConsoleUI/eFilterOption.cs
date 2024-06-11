@@ -1,6 +1,6 @@
 ﻿namespace Ex03.ConsoleUI
 {
-    internal enum eFilterOption
+    internal enum eGarageStateFilter
     {
         All,
         InRepair,
