@@ -17,10 +17,8 @@ namespace Ex03.ConsoleUI
         {
             while (m_ProgramStillRunning)
             {
-                printMenu();
-                eClientAction clientOption = getOptionFromUser();
-                activateAction(clientOption);
-
+                eUserAction userOption = getActionOptionFromUser();
+                activateAction(userOption);
 
             }
         }
@@ -36,22 +34,32 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("6) Charge electric vehicle");
             Console.WriteLine("7) Display client's data");
         }
+        private eUserAction getActionOptionFromUser()
+        {
+            const int k_MinOptionVal = 1;
+            const int k_MaxOptionVal = 7;
 
-        private eClientAction getOptionFromUser()
+            printMenu();
+            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+
+            return (eUserAction)optionNumber;
+        }
+        private int getValidEnumOptionNumber(int i_MinVal, int i_MaxVal)
         {
             bool isValid = false;
             bool isNumber;
-            int userInput = 0; // mybe change the = 0.
+            int optionNumber = 0; // mybe change the = 0.
+            string userInput;
 
             while (!isValid)
             {
-                isNumber = isUserOptionANumber(Console.ReadLine(), out userInput);
-                isValid = isNumber && isUserOptionInRange(userInput);
+                userInput = Console.ReadLine();
+                isNumber = isUserOptionANumber(userInput, out optionNumber);
+                isValid = isNumber && isUserOptionInRange(optionNumber, i_MinVal, i_MaxVal);
             }
 
-            return (eClientAction)userInput;
+            return optionNumber;
         }
-
         private bool isUserOptionANumber(string i_InputAsString, out int o_InputAsInteger)
         {
             bool isValid = int.TryParse(i_InputAsString, out o_InputAsInteger);
@@ -64,55 +72,55 @@ namespace Ex03.ConsoleUI
             return isValid;
         }
 
-        private bool isUserOptionInRange(int i_UserInput)
+        private bool isUserOptionInRange(int i_UserInput, int i_MinVal, int i_MaxVal)
         {
-            bool isValid = i_UserInput >= 1 && i_UserInput <= 7;
+            bool isValid = i_UserInput >= i_MinVal && i_UserInput <= i_MaxVal;
 
             if (!isValid)
             {
-                Console.WriteLine("You not entered a number between 1 to 7, try again.");
+                Console.WriteLine("You not entered a number between {0} to {1}, try again.",
+                    i_MinVal, i_MaxVal);
             }
 
             return isValid;
-
         }
 
-        private void activateAction(eClientAction i_ActionNumber)
+        private void activateAction(eUserAction i_ActionNumber)
         {
 
             switch (i_ActionNumber)
             {
-                case eClientAction.InsertNewVehicle:
+                case eUserAction.InsertNewVehicle:
                     {
                         insertNewVehicleToGarage();
                         break;
                     }
-                case eClientAction.DisplayLicensesPlatesList:
+                case eUserAction.DisplayLicensesPlatesList:
                     {
                         displayLicensesPlatesList();
                         break;
                     }
-                case eClientAction.ChangeVehicleGarageState:
+                case eUserAction.ChangeVehicleGarageState:
                     {
                         changeVehicleGarageState();
                         break;
                     }
-                case eClientAction.FillWheelsWithAir:
+                case eUserAction.FillWheelsWithAir:
                     {
                         fillWheelsWithAir();
                         break;
                     }
-                case eClientAction.ChargeFuelVehicle:
+                case eUserAction.ChargeFuelVehicle:
                     {
                         chargeFuelVehicle();
                         break;
                     }
-                case eClientAction.ChargeElectricVehicle:
+                case eUserAction.ChargeElectricVehicle:
                     {
                         chargeElectricVehicle();
                         break;
                     }
-                case eClientAction.DisplayClientData:
+                case eUserAction.DisplayClientData:
                     {
                         displayClientData();
                         break;
@@ -197,23 +205,13 @@ namespace Ex03.ConsoleUI
         private void displayLicensesPlatesList()
         {
             List<string> LicensesPlatesList;
-            eFilterOption filter = chooseFilterOption();
+            eGarageStateFilter filter = getFilterOptionFromUser();
 
             LicensesPlatesList = getLicensesPlatesListByFilterOption(filter);
             foreach (string licensePlate in LicensesPlatesList)
             {
                 Console.WriteLine(licensePlate);
             }
-        }
-
-        private eFilterOption chooseFilterOption()
-        {
-            eFilterOption filter; 
-
-            printFilterOptions();
-            filter = getFilterOptionFromUser();
-
-            return filter;
         }
 
         private void printFilterOptions()
@@ -223,41 +221,42 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("2) InRepair");
             Console.WriteLine("3) Repaired");
             Console.WriteLine("4) Paid");
-            Console.ReadLine();
+       
         }
-
-        private eFilterOption getFilterOptionFromUser()
+        private eGarageStateFilter getFilterOptionFromUser()
         {
-            //no need to check the validation?
-            int optionNumber = int.Parse(Console.ReadLine()); // TryParse + in range of the enum.
-            eFilterOption filter = (eFilterOption)optionNumber;
+            const int k_MinOptionVal = 1;
+            const int k_MaxOptionVal = 4;
 
-            return filter;
+            printFilterOptions();
+            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+
+            return (eGarageStateFilter)optionNumber;
         }
 
-        private List<string> getLicensesPlatesListByFilterOption(eFilterOption filter)
+        private List<string> getLicensesPlatesListByFilterOption(eGarageStateFilter filter)
         {
             List<string> LicensesPlatesList =null; //will alway be one of the cases here,
                                                    //filter validation is being checked before
 
             switch(filter)
             {
-                case eFilterOption.All:
+                case eGarageStateFilter.All:
                     {
                         LicensesPlatesList = m_GarageEngine.GetLicensePlatesList();
                         break;
                     }
-                case eFilterOption.InRepair:
+                case eGarageStateFilter.InRepair:
                     {
                         LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.InRepair);
                         break;
                     }
-                case eFilterOption.Repaired:
+                case eGarageStateFilter.Repaired:
                     {
                         LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.Repaired);
                         break;
                     }
-                case eFilterOption.Paid:
+                case eGarageStateFilter.Paid:
                     {
                         LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.Paid);
                         break;
@@ -270,8 +269,53 @@ namespace Ex03.ConsoleUI
 
         private void changeVehicleGarageState()
         {
+            string licensePlate = getLicenseFromUser(); //change function to licenseplate
+            eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
 
-        }   
+            m_GarageEngine.ChangeVehicleState(licensePlate, newState);
+        }
+        
+        private eVehicleGarageState getVehicleGarageStateOptionFromUser()
+        {
+            const int k_MinOptionVal = 1;
+            const int k_MaxOptionVal = 3;
+
+            printGarageStateOptions();
+            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+
+            return (eVehicleGarageState)optionNumber;
+        }
+
+        private void printGarageStateOptions()
+        {
+            Console.WriteLine("Choose new vehicle state option:");
+            Console.WriteLine("1) InRepair");
+            Console.WriteLine("2) Repaired");
+            Console.WriteLine("3) Paid");
+        }
+
+        private void fillWheelsWithAir()
+        {
+            string licensePlate = getLicenseFromUser(); //change function to licenseplate
+
+            m_GarageEngine.FillVehicleWheelsWithAir(licensePlate);
+        }
+
+        private void chargeFuelVehicle()
+        {
+
+        }
+
+        private void chargeElectricVehicle()
+        {
+
+        }  
+        
+        private void displayClientData()
+        {
+
+        }  
+        
 
     }
 }
