@@ -3,10 +3,12 @@
     internal enum eClientAction
     {
         InsertNewVehicle,
-        DisplayAllLicensePlates,
+        DisplayLicensesPlatesList,
         ChangeVehicleGarageState,
         FillWheelsWithAir,
-        ChargeVehicleEnergy,
+        //ChargeVehicleEnergy,
+        ChargeFuelVehicle,
+        ChargeElectricVehicle,
         DisplayClientData
 
     }

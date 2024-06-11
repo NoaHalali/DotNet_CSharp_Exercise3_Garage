@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         private Vehicle m_ClientVehicle;
         private string m_OwnerName;
         private string m_OwnerPhoneNum;
-        private eVehicleGarageState m_State;
+        private eVehicleGarageState m_GarageState;
 
         public Vehicle ClientVehicle
         {
@@ -37,22 +37,23 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public eVehicleGarageState State
+        public eVehicleGarageState GarageState
         {
             get
             {
-                return m_State;
+                return m_GarageState;
             }
 
             set
             {
-                m_State = value;
+                m_GarageState = value;
             }
         }
 
         public string GetLicensePlate()
         {
-            return m_clientVehicle.LicensePlate;
+            return m_ClientVehicle.LicensePlate;
         }
+
     }
 }
