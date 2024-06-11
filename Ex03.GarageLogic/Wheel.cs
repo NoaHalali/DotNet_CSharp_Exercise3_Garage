@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class Wheel
+    internal class Wheel
     {
         private string m_ManufacturerName;
         float m_CurrentAirPressure;

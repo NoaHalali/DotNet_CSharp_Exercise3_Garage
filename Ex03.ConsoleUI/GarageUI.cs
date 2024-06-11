@@ -36,6 +36,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("6) Charge electric vehicle");
             Console.WriteLine("7) Display client's data");
         }
+
         private eClientAction getOptionFromUser()
         {
             bool isValid = false;
@@ -131,7 +132,8 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                chooseVehicleType();
+                string vehicleType = chooseVehicleType();
+
 
             }
         }
@@ -146,7 +148,50 @@ namespace Ex03.ConsoleUI
 
         private string chooseVehicleType()
         {
+            bool isVehicleTypeValid = false;
+            string vehicleType = null;
 
+            while (!isVehicleTypeValid)
+            {
+                printVehiclesOptions();
+                vehicleType = Console.ReadLine();
+                isVehicleTypeValid = IsVehicleTypeValid(vehicleType);
+            }
+
+            return vehicleType;
+        }
+
+        private void printVehiclesOptions()
+        {
+            List<string> vehicleOptions = m_GarageEngine.GetVehicleTypesOptions();
+
+            Console.WriteLine("Please enter the type of vehicle that will enter the garage:");
+            foreach (string option in vehicleOptions)
+            {
+                Console.WriteLine(option);
+            }
+        }
+
+        private bool IsVehicleTypeValid(string vehicleType)
+        {
+            List<string> vehicleOptions = m_GarageEngine.GetVehicleTypesOptions();
+            bool isValid = false;
+
+            foreach (string option in vehicleOptions)
+            {
+                if (option == vehicleType)
+                {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            if (!isValid)
+            {
+                Console.WriteLine("Entered invalid option, try again.");
+            }
+
+            return isValid;
         }
 
         private void displayLicensesPlatesList()
@@ -171,7 +216,6 @@ namespace Ex03.ConsoleUI
             return filter;
         }
 
-
         private void printFilterOptions()
         {
             Console.WriteLine("Choose filter option:");
@@ -181,6 +225,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("4) Paid");
             Console.ReadLine();
         }
+
         private eFilterOption getFilterOptionFromUser()
         {
             //no need to check the validation?

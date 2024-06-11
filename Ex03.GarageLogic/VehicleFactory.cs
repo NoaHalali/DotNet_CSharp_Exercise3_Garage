@@ -8,6 +8,25 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleFactory
     {
+        List<string> m_VehicleTypes;
+
+        public VehicleFactory()
+        {
+            m_VehicleTypes.Add("Motorcycle");
+            m_VehicleTypes.Add("ElectricMotorcycle");
+            m_VehicleTypes.Add("Car");
+            m_VehicleTypes.Add("ElectricCar");
+            m_VehicleTypes.Add("Truck");
+        }
+
+        public List<string> VehicleTypes
+        {
+            get 
+            { 
+                return m_VehicleTypes;
+            }
+        }
+
         public enum eVehicleType
         {
             Motorcycle,

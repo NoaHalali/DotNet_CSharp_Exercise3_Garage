@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Ex03.GarageLogic.VehicleFactory;
 
 namespace Ex03.GarageLogic
 {
     public class Garage
     {
         private List<Client> clients;
-        private VehicleFactory m_Factory;
-
+        private VehicleFactory m_Factory = new VehicleFactory();
 
         public bool IsClientAlreadyExists(string i_LicensePlate)
         {
@@ -41,6 +41,7 @@ namespace Ex03.GarageLogic
 
             return licensePlatesList;
         }
+
         public List<string> GetLicensePlatesListByGarageState(eVehicleGarageState i_GarageState)
         {
             List<string> licensePlatesList = new List<string>() ;
@@ -84,5 +85,12 @@ namespace Ex03.GarageLogic
         //{
         //    return null;
         //}
+
+
+        public List<string> GetVehicleTypesOptions()
+        {
+            return m_Factory.VehicleTypes;
+        }
+
     }
 }
