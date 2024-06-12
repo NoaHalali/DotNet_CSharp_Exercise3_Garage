@@ -8,8 +8,14 @@ namespace Ex03.GarageLogic
 {
     internal abstract class ElectricVehicle : Vehicle
     {
-        private float m_BatteryTimeLeft;
+        private float m_BatteryTimeLeft; //add setter
         private float m_MaxBatteryTime;
+
+        public ElectricVehicle(int i_NumOfWheels, int i_MaxWheelAirPressure,
+            float i_MaxBatteryTime): base(i_NumOfWheels, i_MaxWheelAirPressure)
+        {
+            m_MaxBatteryTime = i_MaxBatteryTime;
+        }
 
         public void BatteryCharger(int i_HoursToCharge)
         {

@@ -10,8 +10,11 @@ namespace Ex03.GarageLogic
     {
         eCarColor m_Color;
         eCarNumberOfDoors m_NumOfDoors;
+        private const int k_WheelsNumber = 5;
+        private const int k_MaxWheelAirPressure = 31;
+        private const float k_MaxBatteryTime = 3.5f;
 
-        public ElectricCar() 
+        public ElectricCar() :base(k_WheelsNumber, k_MaxWheelAirPressure, k_MaxBatteryTime)
         {
         }
 
