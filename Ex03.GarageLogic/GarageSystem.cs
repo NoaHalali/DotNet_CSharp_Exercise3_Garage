@@ -7,7 +7,7 @@ using static Ex03.GarageLogic.VehicleFactory;
 
 namespace Ex03.GarageLogic
 {
-    public class Garage
+    public class GarageSystem
     {
         private List<Client> clients;
 

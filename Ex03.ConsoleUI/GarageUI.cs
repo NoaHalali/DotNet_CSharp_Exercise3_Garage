@@ -10,13 +10,14 @@ namespace Ex03.ConsoleUI
 {
     internal class GarageUI
     {
-        private Garage m_GarageEngine;
+        private GarageSystem m_GarageSystem;
         private bool m_ProgramStillRunning = true;
 
         public void RunSystem()
         {
             while (m_ProgramStillRunning)
             {
+
                 eUserAction userOption = getActionOptionFromUser();
                 activateAction(userOption);
 
@@ -134,12 +135,12 @@ namespace Ex03.ConsoleUI
         private void insertNewVehicleToGarage()
         {
             string licensePlate = getLicensePlateFromUser();
-            bool existingClient = m_GarageEngine.IsVehicleAlreadyExistsAtGarage(licensePlate);
+            bool existingClient = m_GarageSystem.IsVehicleAlreadyExistsAtGarage(licensePlate);
 
             if (existingClient)
             {
                 Console.WriteLine("The vehicle alreay been at the garage before.");
-                m_GarageEngine.ChangeVehicleState(licensePlate, eVehicleGarageState.InRepair);
+                m_GarageSystem.ChangeVehicleState(licensePlate, eVehicleGarageState.InRepair);
             }
             else
             {
@@ -224,7 +225,6 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("2) InRepair");
             Console.WriteLine("3) Repaired");
             Console.WriteLine("4) Paid");
-       
         }
 
         private eGarageStateFilter getFilterOptionFromUser()
@@ -247,22 +247,22 @@ namespace Ex03.ConsoleUI
             {
                 case eGarageStateFilter.All:
                     {
-                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesList();
+                        LicensesPlatesList = m_GarageSystem.GetLicensePlatesList();
                         break;
                     }
                 case eGarageStateFilter.InRepair:
                     {
-                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.InRepair);
+                        LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.InRepair);
                         break;
                     }
                 case eGarageStateFilter.Repaired:
                     {
-                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.Repaired);
+                        LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.Repaired);
                         break;
                     }
                 case eGarageStateFilter.Paid:
                     {
-                        LicensesPlatesList = m_GarageEngine.GetLicensePlatesListByGarageState(eVehicleGarageState.Paid);
+                        LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.Paid);
                         break;
                     }
                     //deafult: check validation????
@@ -276,7 +276,7 @@ namespace Ex03.ConsoleUI
             string licensePlate = getLicensePlateOfExistsVehicle();
             eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
 
-            m_GarageEngine.ChangeVehicleState(licensePlate, newState);
+            m_GarageSystem.ChangeVehicleState(licensePlate, newState);
         }
         
         private string getLicensePlateOfExistsVehicle()
@@ -287,7 +287,7 @@ namespace Ex03.ConsoleUI
             while (!isVehicleExitsAtGarage)
             {
                 licensePlate = getLicensePlateFromUser();
-                isVehicleExitsAtGarage = m_GarageEngine.IsVehicleAlreadyExistsAtGarage(licensePlate);
+                isVehicleExitsAtGarage = m_GarageSystem.IsVehicleAlreadyExistsAtGarage(licensePlate);
                 if (!isVehicleExitsAtGarage)
                 {
                     Console.WriteLine("Vehicle with this license plate not exists at the garage, try again.");
@@ -320,7 +320,7 @@ namespace Ex03.ConsoleUI
         {
             string licensePlate = getLicensePlateOfExistsVehicle();
 
-            m_GarageEngine.FillVehicleWheelsWithAir(licensePlate);
+            m_GarageSystem.FillVehicleWheelsWithAir(licensePlate);
         }
 
         private void chargeFuelVehicle()
