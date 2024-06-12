@@ -12,9 +12,9 @@ namespace Ex03.GarageLogic
         private float m_CurrentFuelAmount;
         private float m_MaxFuelAmount;
 
-        public FuelVehicle(int i_NumOfWheels, int i_MaxAirPressure,
-                           eFuelType i_FuelType, float i_MaxFuelAmount)
-                           : base(i_NumOfWheels, i_MaxAirPressure)
+        public FuelVehicle(int i_NumOfWheels, int i_MaxWheelAirPressure,
+            eFuelType i_FuelType, float i_MaxFuelAmount)
+            : base(i_NumOfWheels, i_MaxWheelAirPressure)
         {
             m_FuelType = i_FuelType;
             m_MaxFuelAmount = i_MaxFuelAmount;

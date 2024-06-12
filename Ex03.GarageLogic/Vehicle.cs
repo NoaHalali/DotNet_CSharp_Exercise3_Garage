@@ -13,12 +13,12 @@ namespace Ex03.GarageLogic
         private float m_EnergyPrecentage;
         private List<Wheel> m_Wheels;
 
-        public Vehicle(int i_NumOfWheels, int i_MaxAirPressure)
+        public Vehicle(int i_NumOfWheels, int i_MaxWheelAirPressure)
         {
             m_Wheels = new List<Wheel>(i_NumOfWheels);
             for (int i = 0; i < i_NumOfWheels; i++)
             {
-                m_Wheels.Add(new Wheel(i_MaxAirPressure));
+                m_Wheels.Add(new Wheel(i_MaxWheelAirPressure));
             }
         }
 

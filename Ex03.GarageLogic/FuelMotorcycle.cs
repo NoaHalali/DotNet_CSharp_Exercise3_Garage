@@ -11,10 +11,11 @@ namespace Ex03.GarageLogic
         private eMotorcycleLicenseType m_LicenseType;
         private int m_EngineVolume;
         private const int k_WheelsNumber = 2;
-        private const int k_MaxAirPressure = 33;
+        private const int k_MaxWheelAirPressure = 33;
         private const float k_MaxFuelAmount = 5.5f;
 
-        public FuelMotorcycle() :base(k_WheelsNumber, k_MaxAirPressure, eFuelType.Octan98, k_MaxFuelAmount)
+        public FuelMotorcycle() : base(k_WheelsNumber, k_MaxWheelAirPressure,
+            eFuelType.Octan98, k_MaxFuelAmount)
         {
             
             //List<Wheel> list = Wheels;
