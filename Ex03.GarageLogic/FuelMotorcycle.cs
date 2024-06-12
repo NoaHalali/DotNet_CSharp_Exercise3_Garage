@@ -13,9 +13,12 @@ namespace Ex03.GarageLogic
         private int k_WheelsNumber = 2;
         private const int k_MaxAirPressure = 33;
 
-        public FuelMotorcycle()
+        public FuelMotorcycle() :base(m_NumOfWheels)
         {
-            
+            for(int i=0; i<m_NumOfWheels; i++)
+            {
+                m_[i] = new Wheel(33,);
+            }
         }
 
         public override void FillWheelsAirToMax()
