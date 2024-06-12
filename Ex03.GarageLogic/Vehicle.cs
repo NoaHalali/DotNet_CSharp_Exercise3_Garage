@@ -11,12 +11,15 @@ namespace Ex03.GarageLogic
         private string m_Model;
         private string m_LicensePlate;
         private float m_EnergyPrecentage;
-        protected List<Wheel> m_Wheels;
+        private List<Wheel> m_Wheels;
 
-        public Vehicle(int i_NumOfWheels) 
+        public Vehicle(int i_NumOfWheels, int i_MaxAirPressure)
         {
             m_Wheels = new List<Wheel>(i_NumOfWheels);
-
+            for (int i = 0; i < i_NumOfWheels; i++)
+            {
+                m_Wheels.Add(new Wheel(i_MaxAirPressure));
+            }
         }
 
         public string Model
@@ -49,6 +52,11 @@ namespace Ex03.GarageLogic
             {
                 return m_Wheels;
             }
+
+            //set 
+            //{
+            //    m_Wheels = value;
+            //}
         }
 
         public abstract void FillWheelsAirToMax();
