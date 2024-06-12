@@ -10,10 +10,14 @@ namespace Ex03.GarageLogic
     {
         private eMotorcycleLicenseType m_LicenseType;
         private int m_EngineVolume;
+        private int m_NumOfWheels = 2;
 
-        public FuelMotorcycle()
+        public FuelMotorcycle() :base(m_NumOfWheels)
         {
-            
+            for(int i=0; i<m_NumOfWheels; i++)
+            {
+                m_[i] = new Wheel(33,);
+            }
         }
 
         public override void FillWheelsAirToMax()

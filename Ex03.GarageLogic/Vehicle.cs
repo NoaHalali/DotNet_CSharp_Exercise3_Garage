@@ -11,7 +11,13 @@ namespace Ex03.GarageLogic
         private string m_Model;
         private string m_LicensePlate;
         private float m_EnergyPrecentage;
-        private List<Wheel> m_Wheels;
+        protected List<Wheel> m_Wheels;
+
+        public Vehicle(int i_NumOfWheels) 
+        {
+            m_Wheels = new List<Wheel>(i_NumOfWheels);
+
+        }
 
         public string Model
         {

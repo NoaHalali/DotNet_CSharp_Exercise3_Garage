@@ -12,6 +12,11 @@ namespace Ex03.GarageLogic
         private float m_CurrentFuelAmount;
         private float m_MaxFuelAmount;
 
+        public FuelVehicle(int i_NumOfWheels)
+        {
+
+        }
+
         public void FuelCharging(int i_FuelToAdd, eFuelType i_FuelType)
         {
             if (m_FuelType == i_FuelType)
