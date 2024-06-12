@@ -18,21 +18,18 @@ namespace Ex03.GarageLogic
             eFuelType.Octan98, k_MaxFuelAmount)
         {
             
-            //List<Wheel> list = Wheels;
-            //m_Wheels = new List<Wheel>(i_NumOfWheels);
-            //for (int i = 0; i < i_NumOfWheels; i++)
-            //{
-            //    m_Wheels.Add(new Wheel(i_MaxAirPressure));
-            //}
-            //            const int k_WheelsNumber = 2;
-            //const int k_MaxAirPressure = 33;
-
-            //base.
         }
 
-        public override void FillWheelsAirToMax()
-        {
-            
-        }
     }
 }
+
+//List<Wheel> list = Wheels;
+//m_Wheels = new List<Wheel>(i_NumOfWheels);
+//for (int i = 0; i < i_NumOfWheels; i++)
+//{
+//    m_Wheels.Add(new Wheel(i_MaxAirPressure));
+//}
+//            const int k_WheelsNumber = 2;
+//const int k_MaxAirPressure = 33;
+
+//base.

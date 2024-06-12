@@ -59,7 +59,13 @@ namespace Ex03.GarageLogic
             //}
         }
 
-        public abstract void FillWheelsAirToMax();
-
+        public void FillWheelsAirToMax()
+        {
+            foreach (Wheel wheel in m_Wheels)
+            {
+                float airToAdd = wheel.MaxtAirPressure - wheel.CurrentAirPressure;
+                wheel.AddAir(airToAdd);
+            }
+        }
     }
 }

@@ -17,6 +17,21 @@ namespace Ex03.GarageLogic
             m_MaxAirPressure = i_MaxAirPressure;
         }
 
+        public float CurrentAirPressure
+        {
+            get
+            {
+                return m_CurrentAirPressure;
+            }
+        }
+        public float MaxtAirPressure
+        {
+            get
+            {
+                return m_MaxAirPressure;
+            }
+        }
+
         public void AddAir(float i_AirToAdd)
         {
             if (i_AirToAdd >= 0 && m_CurrentAirPressure + i_AirToAdd <= m_MaxAirPressure)

@@ -47,6 +47,7 @@
     <Compile Include="ElectricVehicle.cs" />
     <Compile Include="eMotorcycleLicenseType.cs" />
     <Compile Include="eCarNumberOfDoors.cs" />
+    <Compile Include="eUserAction.cs" />
     <Compile Include="eVehicleGarageState.cs" />
     <Compile Include="FuelCar.cs" />
     <Compile Include="FuelMotorcycle.cs" />

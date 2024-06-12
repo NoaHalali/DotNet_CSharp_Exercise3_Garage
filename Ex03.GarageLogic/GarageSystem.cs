@@ -76,7 +76,7 @@ namespace Ex03.GarageLogic
             {
                 if (client.GetLicensePlate() == i_LicensePlate)
                 {
-                    client.ClientVehicle
+                    client.ClientVehicle.FillWheelsAirToMax();
                 }
             }
 

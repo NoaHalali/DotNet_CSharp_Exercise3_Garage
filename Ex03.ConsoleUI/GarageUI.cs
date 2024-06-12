@@ -47,6 +47,7 @@ namespace Ex03.ConsoleUI
             return (eUserAction)optionNumber;
         }
 
+
         private int getValidEnumOptionNumber(int i_MinVal, int i_MaxVal)
         {
             bool isValid = false;

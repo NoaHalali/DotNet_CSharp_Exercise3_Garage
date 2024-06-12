@@ -18,9 +18,5 @@ namespace Ex03.GarageLogic
         {
         }
 
-        public override void FillWheelsAirToMax()
-        {
-            
-        }
     }
 }
