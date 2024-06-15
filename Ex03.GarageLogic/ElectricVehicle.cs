@@ -54,7 +54,8 @@ namespace Ex03.GarageLogic
             else
             {
                 float maxBatteryPossibleToAdd = m_MaxBatteryTime - m_BatteryTimeLeft;
-                throw new ValueOutOfRangeException(maxBatteryPossibleToAdd, 0, "Battery charging out of range");
+                throw new ValueOutOfRangeException(maxBatteryPossibleToAdd, 0,
+                    "Battery charging out of range");
             }
         }
 

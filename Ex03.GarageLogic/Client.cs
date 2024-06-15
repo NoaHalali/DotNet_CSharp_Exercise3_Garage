@@ -8,10 +8,18 @@ namespace Ex03.GarageLogic
 {
     internal class Client
     {
-        private Vehicle m_ClientVehicle;
         private string m_OwnerName;
         private string m_OwnerPhoneNum;
+        private Vehicle m_ClientVehicle;
         private eVehicleGarageState m_GarageState;
+
+        public Client(string i_OwnerName, string i_OwnerPhoneNum, Vehicle i_Vehicle) 
+        {
+            m_OwnerName = i_OwnerName;
+            m_OwnerPhoneNum = i_OwnerPhoneNum;
+            m_ClientVehicle = i_Vehicle;
+            m_GarageState = eVehicleGarageState.InRepair;
+        }
 
         public Vehicle ClientVehicle
         {

@@ -24,24 +24,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        protected virtual void FillRequirements()
-        {
-            m_Requirements.Add("Vehicle Model", null);
-            foreach(Wheel wheel in m_Wheels) 
-            {
-                wheel.FillWheelReqierments(m_Requirements);
-            }
-        }
-
-        public virtual void UpdateStateByRequirements()
-        {
-            m_Model = m_Requirements["Vehicle Model"];
-            foreach (Wheel wheel in m_Wheels)
-            {
-                wheel.UpdateWheelStateByRequirements(m_Requirements);
-            }
-        }
-
         public Dictionary<string,string> Requirements
         {
             get
@@ -83,6 +65,30 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_Wheels;
+            }
+        }
+
+        protected virtual void FillRequirements()
+        {
+            m_Requirements.Add("Vehicle Model", null);
+            int wheelCounter = 0;
+
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheelCounter++;
+                wheel.FillWheelReqierments(m_Requirements, wheelCounter);
+            }
+        }
+
+        public virtual void UpdateStateByRequirements()
+        {
+            m_Model = m_Requirements["Vehicle Model"];
+            int wheelCounter = 0;
+
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheelCounter++;
+                wheel.UpdateWheelStateByRequirements(m_Requirements, wheelCounter);
             }
         }
 

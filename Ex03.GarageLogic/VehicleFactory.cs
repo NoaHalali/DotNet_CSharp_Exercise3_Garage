@@ -34,15 +34,15 @@ namespace Ex03.GarageLogic
             {
                 newVehicle = new ElectricMotorcycle(i_LicensePlate);
             }
-            else if (i_TypeToCreate == "ElectricCar")
+            else if (i_TypeToCreate == "Car")
             {
                 newVehicle = new FuelCar(i_LicensePlate);
             }
-            else if (i_TypeToCreate == "Truck")
+            else if (i_TypeToCreate == "ElectricCar")
             {
                 newVehicle = new ElectricCar(i_LicensePlate);
             }
-            else if (i_TypeToCreate == "Car")
+            else if (i_TypeToCreate == "Truck")
             {
                 newVehicle = new Truck(i_LicensePlate);
             }

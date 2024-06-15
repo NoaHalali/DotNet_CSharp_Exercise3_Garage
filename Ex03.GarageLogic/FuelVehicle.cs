@@ -56,7 +56,8 @@ namespace Ex03.GarageLogic
                 else
                 {
                     float maxFuelPossibleToAdd = m_MaxFuelAmount - m_CurrentFuelAmount;
-                    throw new ValueOutOfRangeException(maxFuelPossibleToAdd, 0, "Fuel charging out of range");
+                    throw new ValueOutOfRangeException(maxFuelPossibleToAdd, 0,
+                        "Fuel charging out of range");
                 }
             }
             else

@@ -2,9 +2,9 @@
 {
     internal enum eGarageStateFilter
     {
-        All,
-        InRepair,
-        Repaired,
-        Paid
+        All = 1,
+        InRepair = 2,
+        Repaired = 3,
+        Paid = 4,
     } 
 }

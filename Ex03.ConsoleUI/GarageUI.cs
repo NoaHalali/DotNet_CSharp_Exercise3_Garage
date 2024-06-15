@@ -10,17 +10,16 @@ namespace Ex03.ConsoleUI
 {
     internal class GarageUI
     {
-        private GarageSystem m_GarageSystem;
+        private GarageSystem m_GarageSystem = new GarageSystem();
         private bool m_ProgramStillRunning = true;
 
         public void RunSystem()
         {
+            Console.WriteLine("Welcome to garage management!");
             while (m_ProgramStillRunning)
             {
-
                 eUserAction userOption = getActionOptionFromUser();
                 activateAction(userOption);
-
             }
         }
 
@@ -141,7 +140,7 @@ namespace Ex03.ConsoleUI
 
                 if (existingClient)
                 {
-                    Console.WriteLine("The vehicle alreay been at the garage before.");
+                    Console.WriteLine("The vehicle already been at the garage before.");
                     m_GarageSystem.ChangeVehicleState(licensePlate, eVehicleGarageState.InRepair);
                 }
                 else
@@ -149,6 +148,7 @@ namespace Ex03.ConsoleUI
                     string vehicleType = chooseVehicleType();
                     Vehicle newVehicle = VehicleFactory.CreateNewVehicle(vehicleType, licensePlate);
                     setVehicleState(newVehicle);
+                    addClientToGarageSystem(newVehicle);
                 }
             }
             catch (ArgumentException ex)
@@ -174,14 +174,25 @@ namespace Ex03.ConsoleUI
             Dictionary<string, string> NewVehicleRequirements = i_NewVehicle.Requirements;
             string value;
 
-            foreach (string requirment in NewVehicleRequirements.Keys)
+            List<string> keys = new List<string>(NewVehicleRequirements.Keys);
+
+            foreach (string requirement in keys)
             {
-                Console.WriteLine("Please enter {0}:", requirment);
+                Console.WriteLine("Please enter {0}:", requirement);
                 value = Console.ReadLine();
-                NewVehicleRequirements[requirment] = value;
+                NewVehicleRequirements[requirement] = value;
             }
 
             i_NewVehicle.UpdateStateByRequirements();
+        }
+
+        private void addClientToGarageSystem(Vehicle i_Vehicle)
+        {
+            Console.WriteLine("Please enter client name:");
+            string clientName = Console.ReadLine();
+            Console.WriteLine("Please enter client phone number:");
+            string clientPhoneNumber = Console.ReadLine();
+            m_GarageSystem.AddNewClientToGarageSystem(clientName, clientPhoneNumber, i_Vehicle);
         }
 
         private string getLicensePlateFromUser()
@@ -195,6 +206,7 @@ namespace Ex03.ConsoleUI
         private string chooseVehicleType()
         {
             printVehiclesOptions();
+            Console.Write("Your choice: ");
             string vehicleType = Console.ReadLine();
 
             return vehicleType;
@@ -204,7 +216,7 @@ namespace Ex03.ConsoleUI
         {
             List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
 
-            Console.WriteLine("Please enter the type of vehicle that will enter the garage:");
+            Console.WriteLine("Please enter the type of vehicle that will be entered to the garage from the list below:");
             foreach (string option in vehicleOptions)
             {
                 Console.WriteLine(option);
@@ -268,9 +280,9 @@ namespace Ex03.ConsoleUI
         private List<string> getLicensesPlatesListByFilterOption(eGarageStateFilter filter)
         {
             List<string> LicensesPlatesList = null; //will alway be one of the cases here,
-                                                   //filter validation is being checked before
+                                                    //filter validation is being checked before
 
-            switch(filter)
+            switch (filter)
             {
                 case eGarageStateFilter.All:
                     {

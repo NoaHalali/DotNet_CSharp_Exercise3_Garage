@@ -42,7 +42,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new FormatException("Is carry dangarous materials need to be bool");
+                throw new FormatException("Is carry dangarous materials need to be bool (true/false)");
             }
         }
 

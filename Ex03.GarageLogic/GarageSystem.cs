@@ -9,13 +9,13 @@ namespace Ex03.GarageLogic
 {
     public class GarageSystem
     {
-        private List<Client> clients;
+        private List<Client> m_Clients = new List<Client>();
 
         public bool IsVehicleAlreadyExistsAtGarage(string i_LicensePlate)
         {
             bool exists = false;
 
-            foreach (Client client in clients)
+            foreach (Client client in m_Clients)
             {
                 if (client.GetLicensePlate() == i_LicensePlate)
                 {
@@ -27,12 +27,18 @@ namespace Ex03.GarageLogic
             return exists;
         }
 
+        public void AddNewClientToGarageSystem(string i_OwnerName, string i_OwnerPhoneNum, Vehicle i_Vehicle)
+        {
+            Client newClient = new Client(i_OwnerName, i_OwnerPhoneNum, i_Vehicle);
+            m_Clients.Add(newClient);
+        }
+
         public List<string> GetLicensePlatesList()
         {
             List<string> licensePlatesList = new List<string>();
             string licenstePlate;
 
-            foreach (Client client in clients)
+            foreach (Client client in m_Clients)
             {
                 licenstePlate = client.GetLicensePlate();
                 licensePlatesList.Add(licenstePlate);
@@ -46,7 +52,7 @@ namespace Ex03.GarageLogic
             List<string> licensePlatesList = new List<string>();
             string licenstePlate;
 
-            foreach (Client client in clients)
+            foreach (Client client in m_Clients)
             {
                 if (client.GarageState == i_GarageState)
                 {
@@ -60,7 +66,7 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleState(string i_LicensePlate, eVehicleGarageState i_NewState)
         {
-            foreach (Client client in clients)
+            foreach (Client client in m_Clients)
             {
                 if (client.GetLicensePlate() == i_LicensePlate)
                 {
@@ -72,14 +78,13 @@ namespace Ex03.GarageLogic
 
         public void FillVehicleWheelsWithAir(string i_LicensePlate)
         {
-            foreach (Client client in clients)
+            foreach (Client client in m_Clients)
             {
                 if (client.GetLicensePlate() == i_LicensePlate)
                 {
                     client.ClientVehicle.FillWheelsAirToMax();
                 }
             }
-
         }
 
         public void FillEnergy()

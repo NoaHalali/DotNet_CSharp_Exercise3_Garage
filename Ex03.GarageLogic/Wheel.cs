@@ -32,16 +32,17 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FillWheelReqierments(Dictionary<string, string> i_VehicleRequirements)
+        public void FillWheelReqierments(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber)
         {
-            i_VehicleRequirements.Add("Wheel Manufacturer Name", null);
-            i_VehicleRequirements.Add("Wheel Current Air Pressure", null);
+
+            i_VehicleRequirements.Add($"Wheel {i_WheelNumber} Manufacturer Name", null);
+            i_VehicleRequirements.Add($"Wheel {i_WheelNumber} Current Air Pressure", null);
         }
 
-        public void UpdateWheelStateByRequirements(Dictionary<string, string> i_VehicleRequirements)
+        public void UpdateWheelStateByRequirements(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber)
         {
-            m_ManufacturerName = i_VehicleRequirements["Wheel Manufacturer Name"];
-            setWheelCurrentAirPressure(i_VehicleRequirements["Wheel Current Air Pressure"]);
+            m_ManufacturerName = i_VehicleRequirements[$"Wheel {i_WheelNumber} Manufacturer Name"];
+            setWheelCurrentAirPressure(i_VehicleRequirements[$"Wheel {i_WheelNumber} Current Air Pressure"]);
         }
 
         private void setWheelCurrentAirPressure(string i_WheelCurrentAirPressure)
@@ -64,7 +65,8 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0, "Air pressure out of range");
+                throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0,
+                    "Air pressure out of range");
             }
         }
     }
