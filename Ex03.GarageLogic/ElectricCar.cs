@@ -14,7 +14,8 @@ namespace Ex03.GarageLogic
         private const int k_MaxWheelAirPressure = 31;
         private const float k_MaxBatteryTime = 3.5f;
 
-        public ElectricCar() :base(k_WheelsNumber, k_MaxWheelAirPressure, k_MaxBatteryTime)
+        public ElectricCar(string i_LicensePlate) :base(i_LicensePlate, k_WheelsNumber,
+            k_MaxWheelAirPressure, k_MaxBatteryTime)
         {
         }
 

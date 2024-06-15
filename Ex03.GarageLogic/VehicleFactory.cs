@@ -22,46 +22,33 @@ namespace Ex03.GarageLogic
             return vehicleTypes;
         }
 
-        public enum eVehicleType
+        public static Vehicle CreateNewVehicle(string i_TypeToCreate, string i_LicensePlate)
         {
-            Motorcycle,
-            ElectricMotorcycle,
-            Car,
-            ElectricCar,
-            Truck,
-        }
+            Vehicle newVehicle = null;
 
-        public static Vehicle CreateNewVehicle(eVehicleType i_TypeToCreate)
-        {
-            Vehicle newVehicle;
-
-            switch (i_TypeToCreate)
+            if (i_TypeToCreate == "Motorcycle")
             {
-                case eVehicleType.Motorcycle:
-                    {
-                        newVehicle = new FuelMotorcycle();
-                        break;
-                    }
-                case eVehicleType.ElectricMotorcycle:
-                    {
-                        newVehicle = new ElectricMotorcycle();
-                        break;
-                    }
-                case eVehicleType.Car:
-                    {
-                        newVehicle = new FuelCar();
-                        break;
-                    }
-                case eVehicleType.ElectricCar:
-                    {
-                        newVehicle = new ElectricCar();
-                        break;
-                    }
-                default: // Equal to case eVehicleType.Truck:
-                    {
-                        newVehicle = new Truck();
-                        break;
-                    }
+                newVehicle = new FuelMotorcycle(i_LicensePlate);
+            }
+            else if(i_TypeToCreate == "ElectricMotorcycle")
+            {
+                newVehicle = new ElectricMotorcycle(i_LicensePlate);
+            }
+            else if (i_TypeToCreate == "ElectricCar")
+            {
+                newVehicle = new FuelCar(i_LicensePlate);
+            }
+            else if (i_TypeToCreate == "Truck")
+            {
+                newVehicle = new ElectricCar(i_LicensePlate);
+            }
+            else if (i_TypeToCreate == "Car")
+            {
+                newVehicle = new Truck(i_LicensePlate);
+            }
+            else
+            {
+                throw new ArgumentException("Incorect vehicle type");
             }
 
             return newVehicle;

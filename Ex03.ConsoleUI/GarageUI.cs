@@ -47,7 +47,6 @@ namespace Ex03.ConsoleUI
             return (eUserAction)optionNumber;
         }
 
-
         private int getValidEnumOptionNumber(int i_MinVal, int i_MaxVal)
         {
             bool isValid = false;
@@ -135,19 +134,27 @@ namespace Ex03.ConsoleUI
 
         private void insertNewVehicleToGarage()
         {
-            string licensePlate = getLicensePlateFromUser();
-            bool existingClient = m_GarageSystem.IsVehicleAlreadyExistsAtGarage(licensePlate);
-
-            if (existingClient)
+            try
             {
-                Console.WriteLine("The vehicle alreay been at the garage before.");
-                m_GarageSystem.ChangeVehicleState(licensePlate, eVehicleGarageState.InRepair);
+                string licensePlate = getLicensePlateFromUser();
+                bool existingClient = m_GarageSystem.IsVehicleAlreadyExistsAtGarage(licensePlate);
+
+                if (existingClient)
+                {
+                    Console.WriteLine("The vehicle alreay been at the garage before.");
+                    m_GarageSystem.ChangeVehicleState(licensePlate, eVehicleGarageState.InRepair);
+                }
+                else
+                {
+                    string vehicleType = chooseVehicleType();
+                    Vehicle newVehicle = VehicleFactory.CreateNewVehicle(vehicleType, licensePlate);
+                    
+                }
             }
-            else
+            catch (ArgumentException ex)
             {
-                string vehicleType = chooseVehicleType();
-
-
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+                insertNewVehicleToGarage();
             }
         }
 
@@ -161,15 +168,8 @@ namespace Ex03.ConsoleUI
 
         private string chooseVehicleType()
         {
-            bool isVehicleTypeValid = false;
-            string vehicleType = null;
-
-            while (!isVehicleTypeValid)
-            {
-                printVehiclesOptions();
-                vehicleType = Console.ReadLine();
-                isVehicleTypeValid = IsVehicleTypeValid(vehicleType);
-            }
+            printVehiclesOptions();
+            string vehicleType = Console.ReadLine();
 
             return vehicleType;
         }

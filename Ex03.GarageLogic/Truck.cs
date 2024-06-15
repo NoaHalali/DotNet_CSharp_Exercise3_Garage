@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         private const int k_MaxWheelAirPressure = 28;
         private const float k_MaxFuelAmount = 120f;
 
-        public Truck() : base(k_WheelsNumber, k_MaxWheelAirPressure,
+        public Truck(string i_LicensePlate) : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure,
             eFuelType.Soler, k_MaxFuelAmount)
         {
 

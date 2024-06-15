@@ -32,6 +32,12 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public void FillWheelReqierments(Dictionary<string, string> i_VehicleRequirments)
+        {
+            i_VehicleRequirments.Add("Wheel Manufacturer Name", null);
+            i_VehicleRequirments.Add("Wheel Current Air Pressure", null);
+        }
+
         public void AddAir(float i_AirToAdd)
         {
             if (i_AirToAdd >= 0 && m_CurrentAirPressure + i_AirToAdd <= m_MaxAirPressure)

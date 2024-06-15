@@ -11,8 +11,8 @@ namespace Ex03.GarageLogic
         private float m_BatteryTimeLeft; //add setter
         private float m_MaxBatteryTime;
 
-        public ElectricVehicle(int i_NumOfWheels, int i_MaxWheelAirPressure,
-            float i_MaxBatteryTime): base(i_NumOfWheels, i_MaxWheelAirPressure)
+        public ElectricVehicle(string i_LicensePlate, int i_NumOfWheels, int i_MaxWheelAirPressure,
+            float i_MaxBatteryTime): base(i_LicensePlate,i_NumOfWheels, i_MaxWheelAirPressure)
         {
             m_MaxBatteryTime = i_MaxBatteryTime;
         }
