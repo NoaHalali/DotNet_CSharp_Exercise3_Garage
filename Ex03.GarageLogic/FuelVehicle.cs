@@ -18,10 +18,34 @@ namespace Ex03.GarageLogic
         {
             m_FuelType = i_FuelType;
             m_MaxFuelAmount = i_MaxFuelAmount;
-            
         }
 
-        public void FuelCharging(int i_FuelToAdd, eFuelType i_FuelType)
+        protected override void FillRequirements()
+        {
+            base.FillRequirements();
+            m_Requirements.Add("Current Fuel Amount", null);
+        }
+
+        public override void UpdateStateByRequirements()
+        {
+            base.UpdateStateByRequirements();
+            setCurrentFuelAmount(m_Requirements["Current Fuel Amount"]);
+            EnergyPrecentage = (m_CurrentFuelAmount / m_MaxFuelAmount) * 100;
+        }
+
+        public void setCurrentFuelAmount(string i_CurrentFuelAmount)
+        {
+            if (float.TryParse(i_CurrentFuelAmount, out float currentFuelAmountFloat))
+            {
+                FuelCharging(currentFuelAmountFloat, m_FuelType);
+            }
+            else
+            {
+                throw new FormatException("Fuel amount need to be float number");
+            }
+        }
+
+        public void FuelCharging(float i_FuelToAdd, eFuelType i_FuelType)
         {
             if (m_FuelType == i_FuelType)
             {
@@ -31,12 +55,13 @@ namespace Ex03.GarageLogic
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(m_MaxFuelAmount - m_CurrentFuelAmount, 0);
+                    float maxFuelPossibleToAdd = m_MaxFuelAmount - m_CurrentFuelAmount;
+                    throw new ValueOutOfRangeException(maxFuelPossibleToAdd, 0, "Fuel charging out of range");
                 }
             }
             else
             {
-                throw new ArgumentException("Wrong Fuel Type");
+                throw new ArgumentException("Wrong fuel type");
             }
         }
 

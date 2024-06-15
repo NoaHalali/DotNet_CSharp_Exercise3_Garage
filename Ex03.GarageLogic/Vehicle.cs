@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
         private string m_LicensePlate;
         private float m_EnergyPrecentage;
         private List<Wheel> m_Wheels;
-        protected Dictionary<string, string> m_Requirments = new Dictionary<string, string>();
+        protected Dictionary<string, string> m_Requirements = new Dictionary<string, string>();
 
         public Vehicle(string i_LicensePlate, int i_NumOfWheels, int i_MaxWheelAirPressure)
         {
@@ -22,26 +22,31 @@ namespace Ex03.GarageLogic
             {
                 m_Wheels.Add(new Wheel(i_MaxWheelAirPressure));
             }
-
-            fillWheelsRequirements();
         }
 
-        private void fillWheelsRequirements()
+        protected virtual void FillRequirements()
         {
-            m_Requirments.Add("Vehicle Model", null);
-            //m_EnergyPrecentage לחשב לבד: כמות האנרגיה הנוכחית \ כמות האנרגיה המקסימאלית
-
+            m_Requirements.Add("Vehicle Model", null);
             foreach(Wheel wheel in m_Wheels) 
             {
-                wheel.FillWheelReqierments(m_Requirments);
+                wheel.FillWheelReqierments(m_Requirements);
             }
         }
 
-        public Dictionary<string,string> Requirments
+        public virtual void UpdateStateByRequirements()
+        {
+            m_Model = m_Requirements["Vehicle Model"];
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheel.UpdateWheelStateByRequirements(m_Requirements);
+            }
+        }
+
+        public Dictionary<string,string> Requirements
         {
             get
             {
-                return m_Requirments;
+                return m_Requirements;
             }
         }
 
@@ -66,6 +71,10 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_EnergyPrecentage;
+            }
+            set 
+            { 
+                m_EnergyPrecentage = value;
             }
         }
 

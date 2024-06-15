@@ -32,10 +32,28 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FillWheelReqierments(Dictionary<string, string> i_VehicleRequirments)
+        public void FillWheelReqierments(Dictionary<string, string> i_VehicleRequirements)
         {
-            i_VehicleRequirments.Add("Wheel Manufacturer Name", null);
-            i_VehicleRequirments.Add("Wheel Current Air Pressure", null);
+            i_VehicleRequirements.Add("Wheel Manufacturer Name", null);
+            i_VehicleRequirements.Add("Wheel Current Air Pressure", null);
+        }
+
+        public void UpdateWheelStateByRequirements(Dictionary<string, string> i_VehicleRequirements)
+        {
+            m_ManufacturerName = i_VehicleRequirements["Wheel Manufacturer Name"];
+            setWheelCurrentAirPressure(i_VehicleRequirements["Wheel Current Air Pressure"]);
+        }
+
+        private void setWheelCurrentAirPressure(string i_WheelCurrentAirPressure)
+        {
+            if (float.TryParse(i_WheelCurrentAirPressure, out float wheelCurrentAirPressureFloat))
+            {
+                AddAir(wheelCurrentAirPressureFloat);
+            }
+            else
+            {
+                throw new FormatException("Wheel air pressure need to be float number");
+            }
         }
 
         public void AddAir(float i_AirToAdd)
@@ -46,7 +64,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0);
+                throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0, "Air pressure out of range");
             }
         }
     }

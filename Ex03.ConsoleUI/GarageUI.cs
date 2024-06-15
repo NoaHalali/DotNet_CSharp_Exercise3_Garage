@@ -148,7 +148,7 @@ namespace Ex03.ConsoleUI
                 {
                     string vehicleType = chooseVehicleType();
                     Vehicle newVehicle = VehicleFactory.CreateNewVehicle(vehicleType, licensePlate);
-                    
+                    setVehicleState(newVehicle);
                 }
             }
             catch (ArgumentException ex)
@@ -156,6 +156,32 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Error: {0}, try again.", ex.Message);
                 insertNewVehicleToGarage();
             }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+                insertNewVehicleToGarage();
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine("Error: {0} need to be between {1} to {2}, try again.",
+                    ex.Message, ex.MinValue, ex.MaxValue);
+                insertNewVehicleToGarage();
+            }
+        }
+
+        private void setVehicleState(Vehicle i_NewVehicle)
+        {
+            Dictionary<string, string> NewVehicleRequirements = i_NewVehicle.Requirements;
+            string value;
+
+            foreach (string requirment in NewVehicleRequirements.Keys)
+            {
+                Console.WriteLine("Please enter {0}:", requirment);
+                value = Console.ReadLine();
+                NewVehicleRequirements[requirment] = value;
+            }
+
+            i_NewVehicle.UpdateStateByRequirements();
         }
 
         private string getLicensePlateFromUser()

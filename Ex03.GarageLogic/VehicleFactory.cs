@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Incorect vehicle type");
+                throw new ArgumentException("Incorrect vehicle type");
             }
 
             return newVehicle;
