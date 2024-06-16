@@ -14,17 +14,14 @@ namespace Ex03.GarageLogic
         {
         }
 
-        protected override void AddRequirements()
+        public override void AddRequirements(Dictionary<string, string> i_Requirements)
         {
-            base.AddRequirements();
-            m_Requirements.Add("Battery Time Left", null);
+            i_Requirements.Add("Battery Time Left", null);
         }
 
-        public override void UpdateStateByRequirements()
+        public override void UpdateEngineStateByRequirements(Dictionary<string, string> i_Requirements)
         {
-            base.UpdateStateByRequirements();
-            setBatteryTimeLeft(m_Requirements["Battery Time Left"]);
-            EnergyPrecentage = (m_BatteryTimeLeft / m_MaxBatteryTime) * 100;
+            setBatteryTimeLeft(i_Requirements["Battery Time Left"]);
         }
 
         private void setBatteryTimeLeft(string i_BatteryTimeLeft)

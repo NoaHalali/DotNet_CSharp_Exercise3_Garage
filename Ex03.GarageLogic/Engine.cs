@@ -10,12 +10,28 @@ namespace Ex03.GarageLogic
     public abstract class Engine
     {
 
-        private float m_CurrentEnergyAmount;
+        protected float m_CurrentEnergyAmount;
         private float m_MaxEnergyAmount;
 
-        public Engine(float i_MaxEnergyAmount) 
+        public Engine(float i_MaxEnergyAmount)
         {
             this.m_MaxEnergyAmount = i_MaxEnergyAmount;
+        }
+
+        public float CurrentEnergyAmount
+        {
+            get 
+            {
+                return m_CurrentEnergyAmount;
+            }
+        }
+
+        public float MaxEnergyAmount
+        {
+            get
+            {
+                return m_MaxEnergyAmount;
+            }
         }
 
         protected void Charge(float i_EnergyAmountToAdd)
@@ -43,5 +59,11 @@ namespace Ex03.GarageLogic
 
             return isValid;
         }
+
+        public abstract void AddRequirements(Dictionary<string, string> i_Requirements);
+
+        public abstract void UpdateEngineStateByRequirements(Dictionary<string, string> i_Requirements);
+
+
     }
 }

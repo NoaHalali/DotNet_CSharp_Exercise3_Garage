@@ -73,6 +73,7 @@ namespace Ex03.GarageLogic
         {
             m_Requirements.Add("Vehicle Model", null);
             addWheelsRequirement();
+            m_Engine.AddRequirements(m_Requirements);
         }
 
         private void addWheelsRequirement()
@@ -114,6 +115,10 @@ namespace Ex03.GarageLogic
                 wheelCounter++;
                 wheel.UpdateWheelStateByRequirements(m_Requirements, wheelCounter);
             }
+
+            m_Engine.UpdateEngineStateByRequirements(m_Requirements);
+
+            m_EnergyPrecentage = (m_Engine.CurrentEnergyAmount / m_Engine.MaxEnergyAmount) * 100f;
         }
 
         private void updateWheelsRequirements()

@@ -23,17 +23,14 @@ namespace Ex03.GarageLogic
             m_FuelType = i_FuelType;
         }
 
-        protected override void AddRequirements()
+        public override void AddRequirements(Dictionary<string,string> i_Requirements)
         {
-            base.AddRequirements();
-            m_Requirements.Add("Current Fuel Amount", null);
+            i_Requirements.Add("Current Fuel Amount", null);
         }
 
-        public override void UpdateStateByRequirements()
+        public override void UpdateEngineStateByRequirements(Dictionary<string, string> i_Requirements)
         {
-            base.UpdateStateByRequirements();
-            setCurrentFuelAmount(m_Requirements["Current Fuel Amount"]);
-            EnergyPrecentage = (m_CurrentFuelAmount / m_MaxFuelAmount) * 100;
+            setCurrentFuelAmount(i_Requirements["Current Fuel Amount"]);
         }
 
         public void setCurrentFuelAmount(string i_CurrentFuelAmount)
@@ -48,7 +45,7 @@ namespace Ex03.GarageLogic
             }
         }
      
-        public void AddFuel(float i_FuelToAdd, eFuelType i_FuelType)
+        public void FuelCharging(float i_FuelToAdd, eFuelType i_FuelType)
         {
             if (m_FuelType == i_FuelType)
             {
