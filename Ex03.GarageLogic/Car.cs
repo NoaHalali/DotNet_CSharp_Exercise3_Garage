@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Ex03.GarageLogic.FuelEngine;
 
 namespace Ex03.GarageLogic
 {
@@ -26,8 +27,14 @@ namespace Ex03.GarageLogic
 
         private eCarColor m_CarColor;
         private eCarNumberOfDoors m_CarDoorsNumber;
+        private const int k_WheelsNumber = 5;
+        private const int k_MaxWheelAirPressure = 31;
 
+        public Car(string i_LicensePlate) 
+            : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure)
+        {
 
+        }
 
     }
 }

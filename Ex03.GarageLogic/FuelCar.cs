@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class FuelCar : FuelVehicle
+    internal class FuelCar : Car
     {
-        private eCarColor m_CarColor;
-        private eCarNumberOfDoors m_CarDoorsNumber;
-        private const int k_WheelsNumber = 5;
-        private const int k_MaxWheelAirPressure = 31;
         private const float k_MaxFuelAmount = 45f;
 
-        public FuelCar(string i_LicensePlate) : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure,
-            eFuelType.Octan95, k_MaxFuelAmount)
+        public FuelCar(string i_LicensePlate) :base(i_LicensePlate)
         {
+            m_Engine = new FuelEngine(k_MaxFuelAmount, FuelEngine.eFuelType.Octan95);
             AddRequirements();
         }
 

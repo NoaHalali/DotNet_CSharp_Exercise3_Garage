@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal abstract class FuelVehicle : Vehicle
+    internal class FuelEngine : Engine
     {
         internal enum eFuelType
         {
@@ -17,15 +17,10 @@ namespace Ex03.GarageLogic
         }
 
         private eFuelType m_FuelType;
-        private float m_CurrentFuelAmount;
-        private float m_MaxFuelAmount;
 
-        public FuelVehicle(string i_LicensePlate, int i_NumOfWheels, int i_MaxWheelAirPressure,
-            eFuelType i_FuelType, float i_MaxFuelAmount)
-            : base(i_LicensePlate, i_NumOfWheels, i_MaxWheelAirPressure)
+        public FuelEngine(float i_MaxFuelAmount, eFuelType i_FuelType) : base(i_MaxFuelAmount)
         {
             m_FuelType = i_FuelType;
-            m_MaxFuelAmount = i_MaxFuelAmount;
         }
 
         protected override void AddRequirements()
@@ -52,27 +47,17 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Fuel amount need to be float number");
             }
         }
-
-        public void FuelCharging(float i_FuelToAdd, eFuelType i_FuelType)
+     
+        public void AddFuel(float i_FuelToAdd, eFuelType i_FuelType)
         {
             if (m_FuelType == i_FuelType)
             {
-                if (i_FuelToAdd >= 0 && m_CurrentFuelAmount + i_FuelToAdd <= m_MaxFuelAmount)
-                {
-                    m_CurrentFuelAmount += i_FuelToAdd;
-                }
-                else
-                {
-                    float maxFuelPossibleToAdd = m_MaxFuelAmount - m_CurrentFuelAmount;
-                    throw new ValueOutOfRangeException(maxFuelPossibleToAdd, 0,
-                        "Fuel amount out of range");
-                }
+                base.Charge(i_FuelToAdd);
             }
             else
             {
                 throw new ArgumentException("Wrong fuel type");
             }
         }
-
     }
 }

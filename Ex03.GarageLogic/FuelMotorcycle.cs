@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class FuelMotorcycle : FuelVehicle
+    internal class FuelMotorcycle : Motorcycle
     {
-        private eMotorcycleLicenseType m_LicenseType;
-        private int m_EngineVolume;
-        private const int k_WheelsNumber = 2;
-        private const int k_MaxWheelAirPressure = 33;
         private const float k_MaxFuelAmount = 5.5f;
 
-        public FuelMotorcycle(string i_LicensePlate) : base(i_LicensePlate, k_WheelsNumber,
-            k_MaxWheelAirPressure, eFuelType.Octan98, k_MaxFuelAmount)
+        public FuelMotorcycle(string i_LicensePlate) : base(i_LicensePlate)
         {
+            m_Engine = new FuelEngine(k_MaxFuelAmount, FuelEngine.eFuelType.Octan98);
             AddRequirements();
         }
 

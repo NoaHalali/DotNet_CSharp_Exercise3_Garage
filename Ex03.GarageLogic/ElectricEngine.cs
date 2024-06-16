@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal abstract class ElectricVehicle : Vehicle
+    internal class ElectricEngine : Engine
     {
-        private float m_BatteryTimeLeft;
-        private float m_MaxBatteryTime;
 
-        public ElectricVehicle(string i_LicensePlate, int i_NumOfWheels, int i_MaxWheelAirPressure,
-            float i_MaxBatteryTime): base(i_LicensePlate,i_NumOfWheels, i_MaxWheelAirPressure)
+        public ElectricEngine(float i_MaxBatteryTime): base(i_MaxBatteryTime)
         {
-            m_MaxBatteryTime = i_MaxBatteryTime;
         }
 
         protected override void AddRequirements()
@@ -45,28 +41,7 @@ namespace Ex03.GarageLogic
 
         public void BatteryCharger(float i_HoursToCharge)
         {
-            bool isValid = checkIfValidInput(i_HoursToCharge);
-
-            if (isValid)
-            {
-                m_BatteryTimeLeft += i_HoursToCharge;
-            }
-            else
-            {
-                float maxBatteryPossibleToAdd = m_MaxBatteryTime - m_BatteryTimeLeft;
-                throw new ValueOutOfRangeException(maxBatteryPossibleToAdd, 0,
-                    "Battery charging out of range");
-            }
-        }
-
-        private bool checkIfValidInput(float i_HoursToCharge)
-        {
-            bool isValid;
-            float newBatteryTime = m_BatteryTimeLeft + i_HoursToCharge;
-
-            isValid = i_HoursToCharge >= 0 && newBatteryTime <= m_MaxBatteryTime;
-
-            return isValid;
+            base.Charge(i_HoursToCharge);
         }
     }
 }

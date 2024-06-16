@@ -12,6 +12,7 @@ namespace Ex03.GarageLogic
         private string m_LicensePlate;
         private float m_EnergyPrecentage;
         private List<Wheel> m_Wheels;
+        protected Engine m_Engine;
         protected Dictionary<string, string> m_Requirements = new Dictionary<string, string>();
 
         public Vehicle(string i_LicensePlate, int i_NumOfWheels, int i_MaxWheelAirPressure)
