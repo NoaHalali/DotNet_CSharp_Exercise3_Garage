@@ -12,9 +12,9 @@ namespace Ex03.GarageLogic
         {
             List<string> vehicleTypes = new List<string>
             {
-                "Motorcycle",
+                "FuelMotorcycle",
                 "ElectricMotorcycle",
-                "Car",
+                "FuelCar",
                 "ElectricCar",
                 "Truck"
             };
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
         {
             Vehicle newVehicle;
 
-            if (i_TypeToCreate == "Motorcycle")
+            if (i_TypeToCreate == "FuelMotorcycle")
             {
                 newVehicle = new FuelMotorcycle(i_LicensePlate);
             }
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             {
                 newVehicle = new ElectricMotorcycle(i_LicensePlate);
             }
-            else if (i_TypeToCreate == "Car")
+            else if (i_TypeToCreate == "FuelCar")
             {
                 newVehicle = new FuelCar(i_LicensePlate);
             }

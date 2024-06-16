@@ -8,6 +8,14 @@ namespace Ex03.GarageLogic
 {
     internal abstract class FuelVehicle : Vehicle
     {
+        internal enum eFuelType
+        {
+            Octan95,
+            Octan96,
+            Octan98,
+            Soler,
+        }
+
         private eFuelType m_FuelType;
         private float m_CurrentFuelAmount;
         private float m_MaxFuelAmount;
