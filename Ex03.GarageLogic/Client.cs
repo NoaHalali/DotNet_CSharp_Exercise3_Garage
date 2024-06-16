@@ -62,6 +62,5 @@ namespace Ex03.GarageLogic
         {
             return m_ClientVehicle.LicensePlate;
         }
-
     }
 }

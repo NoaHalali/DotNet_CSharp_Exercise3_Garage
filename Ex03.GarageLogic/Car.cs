@@ -32,9 +32,7 @@ namespace Ex03.GarageLogic
 
         public Car(string i_LicensePlate) 
             : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure)
-        {
-
-        }
+        {}
 
         protected override void AddRequirements()
         {

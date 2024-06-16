@@ -117,7 +117,6 @@ namespace Ex03.GarageLogic
             }
 
             m_Engine.UpdateEngineStateByRequirements(m_Requirements);
-
             m_EnergyPrecentage = (m_Engine.CurrentEnergyAmount / m_Engine.MaxEnergyAmount) * 100f;
         }
 

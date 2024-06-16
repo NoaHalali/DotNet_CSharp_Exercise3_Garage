@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
 {
     public abstract class Engine
     {
-
         protected float m_CurrentEnergyAmount;
         private float m_MaxEnergyAmount;
 

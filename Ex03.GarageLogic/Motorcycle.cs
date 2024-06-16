@@ -23,9 +23,7 @@ namespace Ex03.GarageLogic
 
         public Motorcycle(string i_LicensePlate) 
             : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure)
-        {
-
-        }
+        {}
 
         protected override void AddRequirements()
         {
