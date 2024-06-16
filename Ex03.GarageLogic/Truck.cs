@@ -17,14 +17,14 @@ namespace Ex03.GarageLogic
         public Truck(string i_LicensePlate) : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure,
             eFuelType.Soler, k_MaxFuelAmount)
         {
-            FillRequirements();
+            AddRequirements();
         }
 
-        protected override void FillRequirements()
+        protected override void AddRequirements()
         {
-            base.FillRequirements();
+            base.AddRequirements();
             m_Requirements.Add("Is Carry Dangarous Materials", null);
-            m_Requirements.Add("Cargo Volum", null);
+            m_Requirements.Add("Cargo Volume", null);
         }
 
         public override void UpdateStateByRequirements()

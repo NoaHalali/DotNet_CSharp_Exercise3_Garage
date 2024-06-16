@@ -17,12 +17,12 @@ namespace Ex03.GarageLogic
         public FuelCar(string i_LicensePlate) : base(i_LicensePlate, k_WheelsNumber, k_MaxWheelAirPressure,
             eFuelType.Octan95, k_MaxFuelAmount)
         {
-            FillRequirements();
+            AddRequirements();
         }
 
-        protected override void FillRequirements()
+        protected override void AddRequirements()
         {
-            base.FillRequirements();
+            base.AddRequirements();
             m_Requirements.Add("Car Color", null);
             m_Requirements.Add("Car Doors Number", null);
         }

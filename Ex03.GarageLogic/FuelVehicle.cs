@@ -20,9 +20,9 @@ namespace Ex03.GarageLogic
             m_MaxFuelAmount = i_MaxFuelAmount;
         }
 
-        protected override void FillRequirements()
+        protected override void AddRequirements()
         {
-            base.FillRequirements();
+            base.AddRequirements();
             m_Requirements.Add("Current Fuel Amount", null);
         }
 
@@ -57,7 +57,7 @@ namespace Ex03.GarageLogic
                 {
                     float maxFuelPossibleToAdd = m_MaxFuelAmount - m_CurrentFuelAmount;
                     throw new ValueOutOfRangeException(maxFuelPossibleToAdd, 0,
-                        "Fuel charging out of range");
+                        "Fuel amount out of range");
                 }
             }
             else

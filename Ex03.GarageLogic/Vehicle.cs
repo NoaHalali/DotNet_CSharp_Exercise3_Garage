@@ -68,27 +68,63 @@ namespace Ex03.GarageLogic
             }
         }
 
-        protected virtual void FillRequirements()
+        protected virtual void AddRequirements()
         {
             m_Requirements.Add("Vehicle Model", null);
+            addWheelsRequirement();
+        }
+
+        private void addWheelsRequirement()
+        {
             int wheelCounter = 0;
 
             foreach (Wheel wheel in m_Wheels)
             {
                 wheelCounter++;
-                wheel.FillWheelReqierments(m_Requirements, wheelCounter);
+                wheel.AddWheelReqierments(m_Requirements, wheelCounter);
             }
+        }
+
+        public void SameWheelsStateAddRequirements()
+        {
+            int wheelCounter = 0;
+
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheelCounter++;
+                wheel.DeleteWheelReqierments(m_Requirements, wheelCounter);
+            }
+
+            m_Requirements.Add("All Wheels Manufacturer Name", null);
+            m_Requirements.Add("All Wheels Current Air Pressure", null);
         }
 
         public virtual void UpdateStateByRequirements()
         {
             m_Model = m_Requirements["Vehicle Model"];
+            if (m_Requirements.ContainsKey("All Wheels Manufacturer Name"))
+            {
+                updateWheelsRequirements();
+            }
+
+            int wheelCounter = 0;
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheelCounter++;
+                wheel.UpdateWheelStateByRequirements(m_Requirements, wheelCounter);
+            }
+        }
+
+        private void updateWheelsRequirements()
+        {
             int wheelCounter = 0;
 
             foreach (Wheel wheel in m_Wheels)
             {
                 wheelCounter++;
-                wheel.UpdateWheelStateByRequirements(m_Requirements, wheelCounter);
+                wheel.AddWheelReqierments(m_Requirements, wheelCounter);
+                wheel.SetWheelReqierments(m_Requirements, wheelCounter,
+                    m_Requirements["All Wheels Manufacturer Name"], m_Requirements["All Wheels Current Air Pressure"]);
             }
         }
 

@@ -17,12 +17,12 @@ namespace Ex03.GarageLogic
         public FuelMotorcycle(string i_LicensePlate) : base(i_LicensePlate, k_WheelsNumber,
             k_MaxWheelAirPressure, eFuelType.Octan98, k_MaxFuelAmount)
         {
-            FillRequirements();
+            AddRequirements();
         }
 
-        protected override void FillRequirements()
+        protected override void AddRequirements()
         {
-            base.FillRequirements();
+            base.AddRequirements();
             m_Requirements.Add("License Type", null);
             m_Requirements.Add("Engine Volume", null);
         }

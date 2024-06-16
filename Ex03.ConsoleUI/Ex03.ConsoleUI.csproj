@@ -37,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="eUserAction.cs" />
-    <Compile Include="eGarageStateFilter.cs" />
+    <Compile Include="eUIGarageStateFilter.cs" />
     <Compile Include="GarageUI.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

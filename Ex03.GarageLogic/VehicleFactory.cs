@@ -24,13 +24,13 @@ namespace Ex03.GarageLogic
 
         public static Vehicle CreateNewVehicle(string i_TypeToCreate, string i_LicensePlate)
         {
-            Vehicle newVehicle = null;
+            Vehicle newVehicle;
 
             if (i_TypeToCreate == "Motorcycle")
             {
                 newVehicle = new FuelMotorcycle(i_LicensePlate);
             }
-            else if(i_TypeToCreate == "ElectricMotorcycle")
+            else if (i_TypeToCreate == "ElectricMotorcycle")
             {
                 newVehicle = new ElectricMotorcycle(i_LicensePlate);
             }

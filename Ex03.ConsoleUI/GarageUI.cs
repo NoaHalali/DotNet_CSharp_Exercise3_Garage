@@ -16,11 +16,24 @@ namespace Ex03.ConsoleUI
         public void RunSystem()
         {
             Console.WriteLine("Welcome to garage management!");
+            Console.WriteLine();
             while (m_ProgramStillRunning)
             {
                 eUserAction userOption = getActionOptionFromUser();
                 activateAction(userOption);
+                Console.WriteLine();
             }
+        }
+
+        private eUserAction getActionOptionFromUser()
+        {
+            const int k_MinOptionVal = 1;
+            const int k_MaxOptionVal = 7;
+
+            printMenu();
+            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+
+            return (eUserAction)optionNumber;
         }
 
         private void printMenu()
@@ -33,17 +46,6 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("5) Charge fuel vehicle");
             Console.WriteLine("6) Charge electric vehicle");
             Console.WriteLine("7) Display client's data");
-        }
-
-        private eUserAction getActionOptionFromUser()
-        {
-            const int k_MinOptionVal = 1;
-            const int k_MaxOptionVal = 7;
-
-            printMenu();
-            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
-
-            return (eUserAction)optionNumber;
         }
 
         private int getValidEnumOptionNumber(int i_MinVal, int i_MaxVal)
@@ -93,7 +95,7 @@ namespace Ex03.ConsoleUI
 
             switch (i_ActionNumber)
             {
-                case eUserAction.InsertNewVehicle:
+                case eUserAction.InsertNewVehicle: // Done
                     {
                         insertNewVehicleToGarage();
                         break;
@@ -141,6 +143,7 @@ namespace Ex03.ConsoleUI
                 if (existingClient)
                 {
                     Console.WriteLine("The vehicle already been at the garage before.");
+                    Console.WriteLine("Vehicle state at the garage changing to: in repair.");
                     m_GarageSystem.ChangeVehicleState(licensePlate, eVehicleGarageState.InRepair);
                 }
                 else
@@ -149,6 +152,7 @@ namespace Ex03.ConsoleUI
                     Vehicle newVehicle = VehicleFactory.CreateNewVehicle(vehicleType, licensePlate);
                     setVehicleState(newVehicle);
                     addClientToGarageSystem(newVehicle);
+                    Console.WriteLine("Client with the new vehicle added successfully to the garage system.");
                 }
             }
             catch (ArgumentException ex)
@@ -167,32 +171,6 @@ namespace Ex03.ConsoleUI
                     ex.Message, ex.MinValue, ex.MaxValue);
                 insertNewVehicleToGarage();
             }
-        }
-
-        private void setVehicleState(Vehicle i_NewVehicle)
-        {
-            Dictionary<string, string> NewVehicleRequirements = i_NewVehicle.Requirements;
-            string value;
-
-            List<string> keys = new List<string>(NewVehicleRequirements.Keys);
-
-            foreach (string requirement in keys)
-            {
-                Console.WriteLine("Please enter {0}:", requirement);
-                value = Console.ReadLine();
-                NewVehicleRequirements[requirement] = value;
-            }
-
-            i_NewVehicle.UpdateStateByRequirements();
-        }
-
-        private void addClientToGarageSystem(Vehicle i_Vehicle)
-        {
-            Console.WriteLine("Please enter client name:");
-            string clientName = Console.ReadLine();
-            Console.WriteLine("Please enter client phone number:");
-            string clientPhoneNumber = Console.ReadLine();
-            m_GarageSystem.AddNewClientToGarageSystem(clientName, clientPhoneNumber, i_Vehicle);
         }
 
         private string getLicensePlateFromUser()
@@ -223,32 +201,69 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private bool IsVehicleTypeValid(string vehicleType)
+        private void setVehicleState(Vehicle i_NewVehicle)
         {
-            List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
-            bool isValid = false;
+            sameWheelsStateOption(i_NewVehicle);
+            Dictionary<string, string> NewVehicleRequirements = i_NewVehicle.Requirements;
+            List<string> keys = new List<string>(NewVehicleRequirements.Keys);
+            string value;
 
-            foreach (string option in vehicleOptions)
+            foreach (string requirement in keys)
             {
-                if (option == vehicleType)
-                {
-                    isValid = true;
-                    break;
-                }
+                Console.WriteLine("Please enter {0}:", requirement);
+                value = Console.ReadLine();
+                NewVehicleRequirements[requirement] = value;
             }
 
-            if (!isValid)
-            {
-                Console.WriteLine("Entered invalid option, try again.");
-            }
-
-            return isValid;
+            i_NewVehicle.UpdateStateByRequirements();
         }
+
+        private void sameWheelsStateOption(Vehicle i_NewVehicle)
+        {
+            Console.WriteLine("Do you want to enter same state for all the vehicle wheels? (yes/no)");
+            string sameWheelState = Console.ReadLine();
+
+            if (sameWheelState == "yes")
+            {
+                i_NewVehicle.SameWheelsStateAddRequirements();
+            }
+        }
+
+        private void addClientToGarageSystem(Vehicle i_Vehicle)
+        {
+            Console.WriteLine("Please enter client name:");
+            string clientName = Console.ReadLine();
+            Console.WriteLine("Please enter client phone number:");
+            string clientPhoneNumber = Console.ReadLine();
+            m_GarageSystem.AddNewClientToGarageSystem(clientName, clientPhoneNumber, i_Vehicle);
+        }
+
+        //private bool IsVehicleTypeValid(string vehicleType)
+        //{
+        //    List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
+        //    bool isValid = false;
+
+        //    foreach (string option in vehicleOptions)
+        //    {
+        //        if (option == vehicleType)
+        //        {
+        //            isValid = true;
+        //            break;
+        //        }
+        //    }
+
+        //    if (!isValid)
+        //    {
+        //        Console.WriteLine("Entered invalid option, try again.");
+        //    }
+
+        //    return isValid;
+        //}
 
         private void displayLicensesPlatesList()
         {
             List<string> LicensesPlatesList;
-            eGarageStateFilter filter = getFilterOptionFromUser();
+            eUIGarageStateFilter filter = getFilterOptionFromUser();
 
             LicensesPlatesList = getLicensesPlatesListByFilterOption(filter);
             foreach (string licensePlate in LicensesPlatesList)
@@ -257,16 +272,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private void printFilterOptions()
-        {
-            Console.WriteLine("Choose filter option:");
-            Console.WriteLine("1) All");
-            Console.WriteLine("2) InRepair");
-            Console.WriteLine("3) Repaired");
-            Console.WriteLine("4) Paid");
-        }
-
-        private eGarageStateFilter getFilterOptionFromUser()
+        private eUIGarageStateFilter getFilterOptionFromUser()
         {
             const int k_MinOptionVal = 1;
             const int k_MaxOptionVal = 4;
@@ -274,32 +280,41 @@ namespace Ex03.ConsoleUI
             printFilterOptions();
             int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
 
-            return (eGarageStateFilter)optionNumber;
+            return (eUIGarageStateFilter)optionNumber;
         }
 
-        private List<string> getLicensesPlatesListByFilterOption(eGarageStateFilter filter)
+        private void printFilterOptions()
+        {
+            Console.WriteLine("Choose filter option by it's number:");
+            Console.WriteLine("1) All");
+            Console.WriteLine("2) InRepair");
+            Console.WriteLine("3) Repaired");
+            Console.WriteLine("4) Paid");
+        }
+
+        private List<string> getLicensesPlatesListByFilterOption(eUIGarageStateFilter filter)
         {
             List<string> LicensesPlatesList = null; //will alway be one of the cases here,
                                                     //filter validation is being checked before
 
             switch (filter)
             {
-                case eGarageStateFilter.All:
+                case eUIGarageStateFilter.All:
                     {
                         LicensesPlatesList = m_GarageSystem.GetLicensePlatesList();
                         break;
                     }
-                case eGarageStateFilter.InRepair:
+                case eUIGarageStateFilter.InRepair:
                     {
                         LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.InRepair);
                         break;
                     }
-                case eGarageStateFilter.Repaired:
+                case eUIGarageStateFilter.Repaired:
                     {
                         LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.Repaired);
                         break;
                     }
-                case eGarageStateFilter.Paid:
+                case eUIGarageStateFilter.Paid:
                     {
                         LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.Paid);
                         break;

@@ -32,11 +32,23 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FillWheelReqierments(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber)
+        public void AddWheelReqierments(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber)
         {
-
             i_VehicleRequirements.Add($"Wheel {i_WheelNumber} Manufacturer Name", null);
             i_VehicleRequirements.Add($"Wheel {i_WheelNumber} Current Air Pressure", null);
+        }
+
+        public void DeleteWheelReqierments(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber)
+        {
+            i_VehicleRequirements.Remove($"Wheel {i_WheelNumber} Manufacturer Name");
+            i_VehicleRequirements.Remove($"Wheel {i_WheelNumber} Current Air Pressure");
+        }
+
+        public void SetWheelReqierments(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber,
+            string i_WheelManufactorName, string i_WheelCurrentAitPressure)
+        {
+            i_VehicleRequirements[$"Wheel {i_WheelNumber} Manufacturer Name"] = i_WheelManufactorName;
+            i_VehicleRequirements[$"Wheel {i_WheelNumber} Current Air Pressure"] = i_WheelCurrentAitPressure;
         }
 
         public void UpdateWheelStateByRequirements(Dictionary<string, string> i_VehicleRequirements, int i_WheelNumber)
@@ -66,7 +78,7 @@ namespace Ex03.GarageLogic
             else
             {
                 throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0,
-                    "Air pressure out of range");
+                    "Wheel air pressure out of range"); // האם לשלוח ולהדפיס בין המקסימום ל-0 או בין המקסימום האפשרי הנוכחי (שזה מקסימום פחות מה שיש כרגע) ל-0
             }
         }
     }

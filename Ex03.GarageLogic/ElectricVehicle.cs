@@ -18,9 +18,9 @@ namespace Ex03.GarageLogic
             m_MaxBatteryTime = i_MaxBatteryTime;
         }
 
-        protected override void FillRequirements()
+        protected override void AddRequirements()
         {
-            base.FillRequirements();
+            base.AddRequirements();
             m_Requirements.Add("Battery Time Left", null);
         }
 
