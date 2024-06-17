@@ -25,6 +25,14 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public Engine Engine
+        {
+            get 
+            {
+                return m_Engine;
+            }
+        }
+
         public Dictionary<string,string> Requirements
         {
             get

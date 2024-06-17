@@ -78,7 +78,7 @@ namespace Ex03.GarageLogic
             else
             {
                 throw new ValueOutOfRangeException(m_MaxAirPressure - m_CurrentAirPressure, 0,
-                    "Wheel air pressure out of range"); // האם לשלוח ולהדפיס בין המקסימום ל-0 או בין המקסימום האפשרי הנוכחי (שזה מקסימום פחות מה שיש כרגע) ל-0
+                    "Wheel air pressure out of range");
             }
         }
     }

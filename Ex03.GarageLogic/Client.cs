@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Client
+    public class Client
     {
         private string m_OwnerName;
         private string m_OwnerPhoneNum;
@@ -61,6 +61,15 @@ namespace Ex03.GarageLogic
         public string GetLicensePlate()
         {
             return m_ClientVehicle.LicensePlate;
+        }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("Owner Name");
+            base.ToString();
+
+
+            return stringToReturn;
         }
     }
 }

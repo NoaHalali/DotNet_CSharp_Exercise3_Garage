@@ -95,7 +95,7 @@ namespace Ex03.ConsoleUI
 
             switch (i_ActionNumber)
             {
-                case eUserAction.InsertNewVehicle: // Done
+                case eUserAction.InsertNewVehicle:   // Done
                     {
                         insertNewVehicleToGarage();
                         break;
@@ -112,7 +112,7 @@ namespace Ex03.ConsoleUI
                     }
                 case eUserAction.FillWheelsWithAir:
                     {
-                        fillWheelsWithAir();         // Working
+                        fillWheelsWithAirToMaximum();  // Done
                         break;
                     }
                 case eUserAction.ChargeFuelVehicle:
@@ -152,7 +152,7 @@ namespace Ex03.ConsoleUI
                     Vehicle newVehicle = VehicleFactory.CreateNewVehicle(vehicleType, licensePlate);
                     setVehicleState(newVehicle);
                     addClientToGarageSystem(newVehicle);
-                    Console.WriteLine("Client with the new vehicle added successfully to the garage system.");
+                    Console.WriteLine("Inserted new vehicle to the garage system.");
                 }
             }
             catch (ArgumentException ex)
@@ -331,6 +331,7 @@ namespace Ex03.ConsoleUI
             eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
 
             m_GarageSystem.ChangeVehicleState(licensePlate, newState);
+            Console.WriteLine("Changed vehicle garage state");
         }
         
         private string getLicensePlateOfExistsVehicle()
@@ -370,26 +371,92 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("3) Paid");
         }
 
-        private void fillWheelsWithAir()
+        private void fillWheelsWithAirToMaximum()
         {
             string licensePlate = getLicensePlateOfExistsVehicle();
 
             m_GarageSystem.FillVehicleWheelsWithAir(licensePlate);
+            Console.WriteLine("Filled vehicle wheels with maximum air");
         }
 
         private void chargeFuelVehicle()
         {
+            try
+            {
+                string licensePlate = getLicensePlateOfExistsVehicle();
+                float fuelAmountToAdd = getFuelAmountToAdd();
+                string fuelType = getFuelTypeAsString();
+                m_GarageSystem.AddFuelToVehicle(licensePlate, fuelAmountToAdd, fuelType);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+                chargeFuelVehicle();
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+                chargeFuelVehicle();
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine("Error: {0} need to be between {1} to {2}, try again.",
+                    ex.Message, ex.MinValue, ex.MaxValue);
+                chargeFuelVehicle();
+            }
+        }
 
+        private float getFuelAmountToAdd() // TODO
+        {
+            return 1f;
+        }
+
+        private string getFuelTypeAsString() // TODO
+        {
+            List<string> fuelTypes = m_GarageSystem.GetFuelTypesList();
+
+
+            return null;
         }
 
         private void chargeElectricVehicle()
         {
-
+            try
+            {
+                string licensePlate = getLicensePlateOfExistsVehicle();
+                float electricityMinutesToAdd = getElectricityMinutesToAdd();
+                float electricityHoursToAdd = electricityMinutesToAdd / 60f;
+                m_GarageSystem.AddElectricityToVehicle(licensePlate, electricityHoursToAdd);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+                chargeElectricVehicle();
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+                chargeElectricVehicle();
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine("Error: {0} need to be between {1} to {2}, try again.",
+                    ex.Message, ex.MinValue, ex.MaxValue);
+                chargeElectricVehicle();
+            }
         }  
         
+        private float getElectricityMinutesToAdd() //TODO
+        {
+            return 1f;
+        }
+
         private void displayClientData()
         {
+            string licensePlate = getLicensePlateFromUser();
+            string clientDataToPrint = m_GarageSystem.GetClientData(licensePlate);
 
+            Console.WriteLine(clientDataToPrint);
         }  
         
 
