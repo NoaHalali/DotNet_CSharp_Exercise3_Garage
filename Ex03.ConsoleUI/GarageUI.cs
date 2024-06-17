@@ -11,7 +11,7 @@ namespace Ex03.ConsoleUI
     internal class GarageUI
     {
         private GarageSystem m_GarageSystem = new GarageSystem();
-        //private MessagesUI m_M
+        private MessagesUI m_MessagesToPrint = new MessagesUI();
         private bool m_ProgramStillRunning = true;
 
         public void RunSystem()
@@ -34,7 +34,7 @@ namespace Ex03.ConsoleUI
             string userInput;
             eUserAction? userOptionNumber = null;
 
-            printMenu();
+            m_MessagesToPrint.PrintMenu();
             while (!isValid)
             {
                 userInput = Console.ReadLine();
@@ -222,6 +222,11 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine(licensePlate);
             }
+
+            if (LicensesPlatesList.Count == 0)
+            {
+                Console.WriteLine("No licenses plates at this filter option.");
+            }
         }
 
         private eUIGarageStateFilter getFilterOptionFromUser()
@@ -286,7 +291,6 @@ namespace Ex03.ConsoleUI
                         LicensesPlatesList = m_GarageSystem.GetLicensePlatesListByGarageState(eVehicleGarageState.Paid);
                         break;
                     }
-                    //deafult: check validation????
             }
 
             return LicensesPlatesList;
