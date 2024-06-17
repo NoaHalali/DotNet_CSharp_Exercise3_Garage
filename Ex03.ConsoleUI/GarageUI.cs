@@ -10,6 +10,25 @@ namespace Ex03.ConsoleUI
 {
     internal class GarageUI
     {
+        private enum eUserAction
+        {
+            InsertNewVehicle = 1,
+            DisplayLicensesPlatesList = 2,
+            ChangeVehicleGarageState = 3,
+            FillWheelsWithAir = 4,
+            ChargeFuelVehicle = 5,
+            ChargeElectricVehicle = 6,
+            DisplayClientData = 7,
+        }
+
+        private enum eUIGarageStateFilter
+        {
+            All = 1,
+            InRepair = 2,
+            Repaired = 3,
+            Paid = 4,
+        }
+
         private GarageSystem m_GarageSystem = new GarageSystem();
         private MessagesUI m_MessagesToPrint = new MessagesUI();
         private bool m_ProgramStillRunning = true;

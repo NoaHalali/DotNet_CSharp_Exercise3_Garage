@@ -36,8 +36,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="eUserAction.cs" />
-    <Compile Include="eUIGarageStateFilter.cs" />
     <Compile Include="GarageUI.cs" />
     <Compile Include="MessagesUI.cs" />
     <Compile Include="Program.cs" />
