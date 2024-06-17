@@ -19,6 +19,7 @@ namespace Ex03.ConsoleUI
             m_MessagesToPrint.WelcomeMessage();
             while (m_ProgramStillRunning)
             {
+                m_MessagesToPrint.MenuMessage();
                 eUserAction userOption = getActionOptionFromUser();
                 Console.Clear();
                 activateAction(userOption);
@@ -34,7 +35,6 @@ namespace Ex03.ConsoleUI
             string userInput;
             eUserAction? userOptionNumber = null;
 
-            m_MessagesToPrint.MenuMessage();
             while (!isValid)
             {
                 userInput = Console.ReadLine();
