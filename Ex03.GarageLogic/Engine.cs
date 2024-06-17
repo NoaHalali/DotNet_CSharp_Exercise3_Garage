@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
             {
                 float maxEnergyPossibleToAdd = m_MaxEnergyAmount - m_CurrentEnergyAmount;
                 throw new ValueOutOfRangeException(maxEnergyPossibleToAdd, 0,
-                    "Energy charging out of range");
+                    "Energy out of range");
             }
         }
 
