@@ -16,7 +16,7 @@ namespace Ex03.ConsoleUI
 
         public void RunSystem()
         {
-            Console.WriteLine("Welcome to garage management!" + Environment.NewLine);
+            m_MessagesToPrint.WelcomeMessage();
             while (m_ProgramStillRunning)
             {
                 eUserAction userOption = getActionOptionFromUser();
@@ -34,7 +34,7 @@ namespace Ex03.ConsoleUI
             string userInput;
             eUserAction? userOptionNumber = null;
 
-            m_MessagesToPrint.PrintMenu();
+            m_MessagesToPrint.MenuMessage();
             while (!isValid)
             {
                 userInput = Console.ReadLine();
@@ -50,18 +50,6 @@ namespace Ex03.ConsoleUI
             }
 
             return userOptionNumber.Value;
-        }
-
-        private void printMenu()
-        {
-            Console.WriteLine("Choose a number of action to perform:");
-            Console.WriteLine("1) Insert new vehicle to the garage");
-            Console.WriteLine("2) Display all license plates in the garage system");
-            Console.WriteLine("3) Change vehicle garage state");
-            Console.WriteLine("4) Fill vehicle wheels with maximum air");
-            Console.WriteLine("5) Charge fuel vehicle");
-            Console.WriteLine("6) Charge electric vehicle");
-            Console.WriteLine("7) Display client's data");
         }
 
         private void activateAction(eUserAction i_ActionNumber)
@@ -461,10 +449,17 @@ namespace Ex03.ConsoleUI
 
         private void displayClientData()
         {
-            string licensePlate = getLicensePlateFromUser();
-            string clientDataToPrint = m_GarageSystem.GetClientData(licensePlate);
+            try
+            {
+                string licensePlate = getLicensePlateFromUser();
+                string clientDataToPrint = m_GarageSystem.GetClientData(licensePlate);
 
-            Console.WriteLine(clientDataToPrint);
+                Console.WriteLine(clientDataToPrint);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+            }
         }  
     }
 }

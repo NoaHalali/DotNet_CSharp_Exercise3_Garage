@@ -8,7 +8,12 @@ namespace Ex03.ConsoleUI
 {
     internal class MessagesUI
     {
-        public void PrintMenu()
+        public void WelcomeMessage()
+        {
+            Console.WriteLine("Welcome to garage management!" + Environment.NewLine);
+        }
+
+        public void MenuMessage()
         {
             Console.WriteLine("Choose a number of action to perform:");
             Console.WriteLine("1) Insert new vehicle to the garage");
