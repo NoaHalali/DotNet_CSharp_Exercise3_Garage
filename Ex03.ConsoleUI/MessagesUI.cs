@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex03.GarageLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,34 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("5) Charge fuel vehicle");
             Console.WriteLine("6) Charge electric vehicle");
             Console.WriteLine("7) Display client's data");
+        }
+
+        public void VehiclesOptionsMessage()
+        {
+            List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
+
+            Console.WriteLine("Please enter the type of vehicle that will be entered to the garage from the list below:");
+            foreach (string option in vehicleOptions)
+            {
+                Console.WriteLine(option);
+            }
+        }
+
+        public void FilterOptionsMessage()
+        {
+            Console.WriteLine("Choose filter option by it's number:");
+            Console.WriteLine("1) All");
+            Console.WriteLine("2) InRepair");
+            Console.WriteLine("3) Repaired");
+            Console.WriteLine("4) Paid");
+        }
+
+        public void GarageStateOptionsMessage()
+        {
+            Console.WriteLine("Choose new vehicle state option:");
+            Console.WriteLine("1) InRepair");
+            Console.WriteLine("2) Repaired");
+            Console.WriteLine("3) Paid");
         }
     }
 }

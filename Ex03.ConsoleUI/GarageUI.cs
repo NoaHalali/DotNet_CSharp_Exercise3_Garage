@@ -57,39 +57,39 @@ namespace Ex03.ConsoleUI
 
             switch (i_ActionNumber)
             {
-                case eUserAction.InsertNewVehicle:   // Done
+                case eUserAction.InsertNewVehicle:
                     {
                         insertNewVehicleToGarage();
                         break;
                     }
                 case eUserAction.DisplayLicensesPlatesList:
                     {
-                        displayLicensesPlatesList(); // Done
+                        displayLicensesPlatesList();
                         break;
                     }
                 case eUserAction.ChangeVehicleGarageState:
                     {
-                        changeVehicleGarageState();  // Done
+                        changeVehicleGarageState();
                         break;
                     }
                 case eUserAction.FillWheelsWithAir:
                     {
-                        fillWheelsWithAirToMaximum();  // Done
+                        fillWheelsWithAirToMaximum();
                         break;
                     }
                 case eUserAction.ChargeFuelVehicle:
                     {
-                        chargeFuelVehicle();           // Done
+                        chargeFuelVehicle();
                         break;
                     }
                 case eUserAction.ChargeElectricVehicle:
                     {
-                        chargeElectricVehicle();       // Done
+                        chargeElectricVehicle();
                         break;
                     }
                 case eUserAction.DisplayClientData:
                     {
-                        displayClientData();           // Done
+                        displayClientData();
                         break;
                     }
             }
@@ -129,7 +129,7 @@ namespace Ex03.ConsoleUI
             }
             catch (ValueOutOfRangeException ex)
             {
-                Console.WriteLine("Error: {0} need to be between {1} to {2}, try again.",
+                Console.WriteLine("Error: {0}, need to be between {1} to {2}, try again.",
                     ex.Message, ex.MinValue, ex.MaxValue);
                 insertNewVehicleToGarage();
             }
@@ -145,22 +145,11 @@ namespace Ex03.ConsoleUI
 
         private string chooseVehicleType()
         {
-            printVehiclesOptions();
+            m_MessagesToPrint.VehiclesOptionsMessage();
             Console.Write("Your choice: ");
             string vehicleType = Console.ReadLine();
 
             return vehicleType;
-        }
-
-        private void printVehiclesOptions()
-        {
-            List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
-
-            Console.WriteLine("Please enter the type of vehicle that will be entered to the garage from the list below:");
-            foreach (string option in vehicleOptions)
-            {
-                Console.WriteLine(option);
-            }
         }
 
         private void setVehicleState(Vehicle i_NewVehicle)
@@ -225,7 +214,7 @@ namespace Ex03.ConsoleUI
             string userInput;
             eUIGarageStateFilter? userOptionNumber = null;
 
-            printFilterOptions();
+            m_MessagesToPrint.FilterOptionsMessage();
             while (!isValid)
             {
                 userInput = Console.ReadLine();
@@ -241,15 +230,6 @@ namespace Ex03.ConsoleUI
             }
 
             return userOptionNumber.Value;
-        }
-
-        private void printFilterOptions()
-        {
-            Console.WriteLine("Choose filter option by it's number:");
-            Console.WriteLine("1) All");
-            Console.WriteLine("2) InRepair");
-            Console.WriteLine("3) Repaired");
-            Console.WriteLine("4) Paid");
         }
 
         private List<string> getLicensesPlatesListByFilterOption(eUIGarageStateFilter filter)
@@ -308,7 +288,7 @@ namespace Ex03.ConsoleUI
             string userInput;
             eVehicleGarageState? userOptionNumber = null;
 
-            printGarageStateOptions();
+            m_MessagesToPrint.GarageStateOptionsMessage();
             while (!isValid)
             {
                 userInput = Console.ReadLine();
@@ -324,14 +304,6 @@ namespace Ex03.ConsoleUI
             }
 
             return userOptionNumber.Value;
-        }
-
-        private void printGarageStateOptions()
-        {
-            Console.WriteLine("Choose new vehicle state option:");
-            Console.WriteLine("1) InRepair");
-            Console.WriteLine("2) Repaired");
-            Console.WriteLine("3) Paid");
         }
 
         private void fillWheelsWithAirToMaximum()
