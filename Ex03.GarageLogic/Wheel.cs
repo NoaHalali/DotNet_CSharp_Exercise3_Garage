@@ -81,5 +81,16 @@ namespace Ex03.GarageLogic
                     "Wheel air pressure out of range");
             }
         }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("manufacturer name: {0}" + Environment.NewLine +
+                "current air pressure: {1}" + Environment.NewLine +
+                "max air pressure: {2}"
+                , m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPressure);
+
+            return stringToReturn;
+        }
+
     }
 }

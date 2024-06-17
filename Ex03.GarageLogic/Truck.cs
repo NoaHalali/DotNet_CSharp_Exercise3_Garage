@@ -57,5 +57,16 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Cargo volume need to be float number");
             }
         }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("vehicle type: truck" + Environment.NewLine +
+                "is carry dangarous materials: {0}" + Environment.NewLine +
+                "cargo volume: {1}" + Environment.NewLine +
+                "{2}"
+                , m_IsCarryDangarousMaterials.ToString(), m_CargoVolume, base.ToString());
+
+            return stringToReturn;
+        }
     }
 }

@@ -56,5 +56,14 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Wrong fuel type");
             }
         }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("fuel type: {0}" + Environment.NewLine +
+                "{1}"
+                , m_FuelType.ToString(), base.ToString());
+
+            return stringToReturn;
+        }
     }
 }

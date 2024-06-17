@@ -15,8 +15,7 @@ namespace Ex03.ConsoleUI
 
         public void RunSystem()
         {
-            Console.WriteLine("Welcome to garage management!");
-            Console.WriteLine();
+            Console.WriteLine("Welcome to garage management!" + Environment.NewLine);
             while (m_ProgramStillRunning)
             {
                 eUserAction userOption = getActionOptionFromUser();

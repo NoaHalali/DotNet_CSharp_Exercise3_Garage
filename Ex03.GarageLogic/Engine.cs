@@ -63,6 +63,14 @@ namespace Ex03.GarageLogic
 
         public abstract void UpdateEngineStateByRequirements(Dictionary<string, string> i_Requirements);
 
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("current energy amount: {0}" + Environment.NewLine +
+                "max energy amount: {1}"
+                , m_CurrentEnergyAmount, m_MaxEnergyAmount);
+
+            return stringToReturn;
+        }
 
     }
 }

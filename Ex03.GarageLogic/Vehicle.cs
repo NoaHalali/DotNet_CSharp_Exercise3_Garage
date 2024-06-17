@@ -149,5 +149,35 @@ namespace Ex03.GarageLogic
                 wheel.AddAir(airToAdd);
             }
         }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("vehicle model: {0}" + Environment.NewLine +
+                "license plate: {1}" + Environment.NewLine +
+                "energy precentage: {2}" + Environment.NewLine +
+                "wheels:" + Environment.NewLine +
+                "{3}" +
+                "engine:" + Environment.NewLine + 
+                "{4}"
+                , m_Model, m_LicensePlate, m_EnergyPrecentage, wheelsToString(), m_Engine.ToString());
+
+            return stringToReturn;
+        }
+
+        private string wheelsToString()
+        {
+            StringBuilder wheelStr = new StringBuilder();
+
+            int wheelCounter = 0;
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheelCounter++;
+                wheelStr.Append(string.Format("wheel number {0}:" + Environment.NewLine +
+                    "{1}" + Environment.NewLine
+                    , wheelCounter, wheel.ToString()));
+            }
+
+            return wheelStr.ToString();
+        }
     }
 }

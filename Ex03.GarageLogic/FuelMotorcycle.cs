@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Ex03.GarageLogic.Car;
 
 namespace Ex03.GarageLogic
 {
@@ -24,6 +25,15 @@ namespace Ex03.GarageLogic
         public override void UpdateStateByRequirements()
         {
             base.UpdateStateByRequirements();
+        }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("vehicle type: fuel motorcycle" + Environment.NewLine +
+                "{0}"
+                , base.ToString());
+
+            return stringToReturn;
         }
     }
 }

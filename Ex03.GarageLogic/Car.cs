@@ -95,5 +95,16 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Incorrect car doors number (only 2,3,4,5 allowed)");
             }
         }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("car color: {0}" + Environment.NewLine +
+                "car doors number: {1}" + Environment.NewLine +
+                "{2}"
+                , m_CarColor.ToString(), m_CarDoorsNumber.ToString(), base.ToString());
+
+            return stringToReturn;
+        }
+
     }
 }

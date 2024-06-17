@@ -73,5 +73,15 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Engine volume need to be int number");
             }
         }
+
+        public override string ToString()
+        {
+            string stringToReturn = string.Format("license type: {0}" + Environment.NewLine +
+                "engine volume: {1}" + Environment.NewLine +
+                "{2}"
+                , m_LicenseType.ToString(), m_EngineVolume, base.ToString());
+
+            return stringToReturn;
+        }
     }
 }
