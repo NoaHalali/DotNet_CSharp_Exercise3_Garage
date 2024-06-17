@@ -19,6 +19,7 @@ namespace Ex03.ConsoleUI
             while (m_ProgramStillRunning)
             {
                 eUserAction userOption = getActionOptionFromUser();
+                Console.Clear();
                 activateAction(userOption);
                 Console.WriteLine();
             }
@@ -28,11 +29,26 @@ namespace Ex03.ConsoleUI
         {
             const int k_MinOptionVal = 1;
             const int k_MaxOptionVal = 7;
+            bool isValid = false;
+            string userInput;
+            eUserAction? userOptionNumber = null;
 
             printMenu();
-            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+            while (!isValid)
+            {
+                userInput = Console.ReadLine();
+                isValid = Enum.TryParse(userInput, out eUserAction enumOptionNumber);
+                if (isValid)
+                {
+                    userOptionNumber = enumOptionNumber;
+                    break;
+                }
 
-            return (eUserAction)optionNumber;
+                Console.WriteLine("Input must be between {0} to {1}, try again.",
+                k_MinOptionVal, k_MaxOptionVal);
+            }
+
+            return userOptionNumber.Value;
         }
 
         private void printMenu()
@@ -45,48 +61,6 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("5) Charge fuel vehicle");
             Console.WriteLine("6) Charge electric vehicle");
             Console.WriteLine("7) Display client's data");
-        }
-
-        private int getValidEnumOptionNumber(int i_MinVal, int i_MaxVal)
-        {
-            bool isValid = false;
-            bool isNumber;
-            int optionNumber = 0; // mybe change the = 0.
-            string userInput;
-
-            while (!isValid)
-            {
-                userInput = Console.ReadLine();
-                isNumber = isUserOptionANumber(userInput, out optionNumber);
-                isValid = isNumber && isUserOptionInRange(optionNumber, i_MinVal, i_MaxVal);
-            }
-
-            return optionNumber;
-        }
-
-        private bool isUserOptionANumber(string i_InputAsString, out int o_InputAsInteger)
-        {
-            bool isValid = int.TryParse(i_InputAsString, out o_InputAsInteger);
-
-            if (!isValid)
-            {
-                Console.WriteLine("You not entered a number, try again.");
-            }
-
-            return isValid;
-        }
-
-        private bool isUserOptionInRange(int i_UserInput, int i_MinVal, int i_MaxVal)
-        {
-            bool isValid = i_UserInput >= i_MinVal && i_UserInput <= i_MaxVal;
-
-            if (!isValid)
-            {
-                Console.WriteLine("You not entered a number between {0} to {1}, try again.",
-                    i_MinVal, i_MaxVal);
-            }
-
-            return isValid;
         }
 
         private void activateAction(eUserAction i_ActionNumber)
@@ -116,17 +90,17 @@ namespace Ex03.ConsoleUI
                     }
                 case eUserAction.ChargeFuelVehicle:
                     {
-                        chargeFuelVehicle();
+                        chargeFuelVehicle();           // Done
                         break;
                     }
                 case eUserAction.ChargeElectricVehicle:
                     {
-                        chargeElectricVehicle();
+                        chargeElectricVehicle();       // Done
                         break;
                     }
                 case eUserAction.DisplayClientData:
                     {
-                        displayClientData();
+                        displayClientData();           // Done
                         break;
                     }
             }
@@ -151,7 +125,7 @@ namespace Ex03.ConsoleUI
                     Vehicle newVehicle = VehicleFactory.CreateNewVehicle(vehicleType, licensePlate);
                     setVehicleState(newVehicle);
                     addClientToGarageSystem(newVehicle);
-                    Console.WriteLine("Inserted new vehicle to the garage system.");
+                    Console.WriteLine("Inserted new vehicle to the garage system successfully.");
                 }
             }
             catch (ArgumentException ex)
@@ -174,7 +148,7 @@ namespace Ex03.ConsoleUI
 
         private string getLicensePlateFromUser()
         {
-            Console.WriteLine("Please enter vehicle license plate:");
+            Console.Write("Please enter vehicle license plate: ");
             string licensePlate = Console.ReadLine();
 
             return licensePlate;
@@ -237,28 +211,6 @@ namespace Ex03.ConsoleUI
             m_GarageSystem.AddNewClientToGarageSystem(clientName, clientPhoneNumber, i_Vehicle);
         }
 
-        //private bool IsVehicleTypeValid(string vehicleType)
-        //{
-        //    List<string> vehicleOptions = VehicleFactory.GetVehicleTypes();
-        //    bool isValid = false;
-
-        //    foreach (string option in vehicleOptions)
-        //    {
-        //        if (option == vehicleType)
-        //        {
-        //            isValid = true;
-        //            break;
-        //        }
-        //    }
-
-        //    if (!isValid)
-        //    {
-        //        Console.WriteLine("Entered invalid option, try again.");
-        //    }
-
-        //    return isValid;
-        //}
-
         private void displayLicensesPlatesList()
         {
             List<string> LicensesPlatesList;
@@ -275,11 +227,26 @@ namespace Ex03.ConsoleUI
         {
             const int k_MinOptionVal = 1;
             const int k_MaxOptionVal = 4;
+            bool isValid = false;
+            string userInput;
+            eUIGarageStateFilter? userOptionNumber = null;
 
             printFilterOptions();
-            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+            while (!isValid)
+            {
+                userInput = Console.ReadLine();
+                isValid = Enum.TryParse(userInput, out eUIGarageStateFilter enumOptionNumber);
+                if (isValid)
+                {
+                    userOptionNumber = enumOptionNumber;
+                    break;
+                }
 
-            return (eUIGarageStateFilter)optionNumber;
+                Console.WriteLine("Input must be between {0} to {1}, try again.",
+                k_MinOptionVal, k_MaxOptionVal);
+            }
+
+            return userOptionNumber.Value;
         }
 
         private void printFilterOptions()
@@ -326,40 +293,44 @@ namespace Ex03.ConsoleUI
 
         private void changeVehicleGarageState()
         {
-            string licensePlate = getLicensePlateOfExistsVehicle();
-            eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
-
-            m_GarageSystem.ChangeVehicleState(licensePlate, newState);
-            Console.WriteLine("Changed vehicle garage state");
-        }
-        
-        private string getLicensePlateOfExistsVehicle()
-        {
-            bool isVehicleExitsAtGarage = false;
-            string licensePlate = null;
-
-            while (!isVehicleExitsAtGarage)
+            try
             {
-                licensePlate = getLicensePlateFromUser();
-                isVehicleExitsAtGarage = m_GarageSystem.IsVehicleAlreadyExistsAtGarage(licensePlate);
-                if (!isVehicleExitsAtGarage)
-                {
-                    Console.WriteLine("Vehicle with this license plate not exists at the garage, try again.");
-                }
-            }
+                string licensePlate = getLicensePlateFromUser();
+                eVehicleGarageState newState = getVehicleGarageStateOptionFromUser();
 
-            return licensePlate;
+                m_GarageSystem.ChangeVehicleState(licensePlate, newState);
+                Console.WriteLine("Changed vehicle garage state successfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+            }
         }
 
         private eVehicleGarageState getVehicleGarageStateOptionFromUser()
         {
             const int k_MinOptionVal = 1;
             const int k_MaxOptionVal = 3;
+            bool isValid = false;
+            string userInput;
+            eVehicleGarageState? userOptionNumber = null;
 
             printGarageStateOptions();
-            int optionNumber = getValidEnumOptionNumber(k_MinOptionVal, k_MaxOptionVal);
+            while (!isValid)
+            {
+                userInput = Console.ReadLine();
+                isValid = Enum.TryParse(userInput, out eVehicleGarageState enumOptionNumber);
+                if (isValid)
+                {
+                    userOptionNumber = enumOptionNumber;
+                    break;
+                }
 
-            return (eVehicleGarageState)optionNumber;
+                Console.WriteLine("Input must be between {0} to {1}, try again.",
+                k_MinOptionVal, k_MaxOptionVal);
+            }
+
+            return userOptionNumber.Value;
         }
 
         private void printGarageStateOptions()
@@ -372,30 +343,32 @@ namespace Ex03.ConsoleUI
 
         private void fillWheelsWithAirToMaximum()
         {
-            string licensePlate = getLicensePlateOfExistsVehicle();
+            try
+            {
+                string licensePlate = getLicensePlateFromUser();
 
-            m_GarageSystem.FillVehicleWheelsWithAir(licensePlate);
-            Console.WriteLine("Filled vehicle wheels with maximum air");
+                m_GarageSystem.FillVehicleWheelsWithAir(licensePlate);
+                Console.WriteLine("Filled vehicle wheels with maximum air successfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: {0}, try again.", ex.Message);
+            }
         }
 
         private void chargeFuelVehicle()
         {
             try
             {
-                string licensePlate = getLicensePlateOfExistsVehicle();
+                string licensePlate = getLicensePlateFromUser();
                 float fuelAmountToAdd = getFuelAmountToAdd();
                 string fuelType = getFuelTypeAsString();
                 m_GarageSystem.AddFuelToVehicle(licensePlate, fuelAmountToAdd, fuelType);
+                Console.WriteLine("Charged fuel vehicle successfully.");
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine("Error: {0}, try again.", ex.Message);
-                chargeFuelVehicle();
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine("Error: {0}, try again.", ex.Message);
-                chargeFuelVehicle();
             }
             catch (ValueOutOfRangeException ex)
             {
@@ -405,37 +378,65 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private float getFuelAmountToAdd() // TODO
+        private float getFuelAmountToAdd()
         {
-            return 1f;
+            Console.Write("Please enter fuel amount to add: ");
+            float fuelAmountToAdd = getValidFloatEnergyToAdd();
+
+            return fuelAmountToAdd;
         }
 
-        private string getFuelTypeAsString() // TODO
+        private float getValidFloatEnergyToAdd()
+        {
+            
+            bool isValid = false;
+            float? fuelAmountToAdd = null;
+
+            while (!isValid)
+            {
+                string fuelAsString = Console.ReadLine();
+                isValid = float.TryParse(fuelAsString, out float tempfuelAmountToAdd);
+                if (isValid)
+                {
+                    fuelAmountToAdd = tempfuelAmountToAdd;
+                    break;
+                }
+
+                Console.WriteLine("Input must be float number, try again.");
+            }
+
+            return fuelAmountToAdd.Value;
+        }
+
+        private string getFuelTypeAsString()
         {
             List<string> fuelTypes = m_GarageSystem.GetFuelTypesList();
 
+            Console.WriteLine("Please enter fuel type from the list below:");
+            foreach (string fuelType in fuelTypes)
+            {
+                Console.WriteLine("{0}", fuelType);
+            }
 
-            return null;
+            Console.Write("Your choice: ");
+            string fuelTypeFromUser = Console.ReadLine();
+
+            return fuelTypeFromUser;
         }
 
         private void chargeElectricVehicle()
         {
             try
             {
-                string licensePlate = getLicensePlateOfExistsVehicle();
+                string licensePlate = getLicensePlateFromUser();
                 float electricityMinutesToAdd = getElectricityMinutesToAdd();
                 float electricityHoursToAdd = electricityMinutesToAdd / 60f;
                 m_GarageSystem.AddElectricityToVehicle(licensePlate, electricityHoursToAdd);
+                Console.WriteLine("Charge electric vehicle successfully.");
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine("Error: {0}, try again.", ex.Message);
-                chargeElectricVehicle();
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine("Error: {0}, try again.", ex.Message);
-                chargeElectricVehicle();
             }
             catch (ValueOutOfRangeException ex)
             {
@@ -445,9 +446,12 @@ namespace Ex03.ConsoleUI
             }
         }  
         
-        private float getElectricityMinutesToAdd() //TODO
+        private float getElectricityMinutesToAdd()
         {
-            return 1f;
+            Console.WriteLine("Please enter electricity minutes to charge");
+            float electricityMinutesAsString = getValidFloatEnergyToAdd();
+            
+            return electricityMinutesAsString;
         }
 
         private void displayClientData()
@@ -457,7 +461,5 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine(clientDataToPrint);
         }  
-        
-
     }
 }

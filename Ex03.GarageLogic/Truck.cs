@@ -23,22 +23,22 @@ namespace Ex03.GarageLogic
         protected override void AddRequirements()
         {
             base.AddRequirements();
-            m_Requirements.Add("Is Carry Dangarous Materials", null);
+            m_Requirements.Add("Is Carry Dangarous Materials (yes/no)", null);
             m_Requirements.Add("Cargo Volume", null);
         }
 
         public override void UpdateStateByRequirements()
         {
             base.UpdateStateByRequirements();
-            setIsCarryDangarousMaterials(m_Requirements["Is Carry Dangarous Materials"]);
-            setCargoVolume(m_Requirements["Cargo Volum"]);
+            setIsCarryDangarousMaterials(m_Requirements["Is Carry Dangarous Materials (yes/no)"]);
+            setCargoVolume(m_Requirements["Cargo Volume"]);
         }
 
         private void setIsCarryDangarousMaterials(string i_IsCarryDangarousMaterials)
         {
-            if (bool.TryParse(i_IsCarryDangarousMaterials, out bool isCarryDangarousMaterialsBool))
+            if (i_IsCarryDangarousMaterials == "yes" || i_IsCarryDangarousMaterials == "no")
             {
-                m_IsCarryDangarousMaterials = isCarryDangarousMaterialsBool;
+                m_IsCarryDangarousMaterials = i_IsCarryDangarousMaterials == "yes";
             }
             else
             {

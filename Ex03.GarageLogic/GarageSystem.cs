@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using static Ex03.GarageLogic.VehicleFactory;
 
 namespace Ex03.GarageLogic
 {
@@ -82,13 +81,12 @@ namespace Ex03.GarageLogic
 
         public List<string> GetFuelTypesList()
         {
-            List<string> fuelTypes = new List<string>
+            List<string> fuelTypes = new List<string>();
+
+            foreach (FuelEngine.eFuelType fuelType in Enum.GetValues(typeof(FuelEngine.eFuelType)))
             {
-                "Octan95",
-                "Octan96",
-                "Octan98",
-                "Soler",
-            };
+                fuelTypes.Add(fuelType.ToString());
+            }
 
             return fuelTypes;
         }
@@ -149,7 +147,7 @@ namespace Ex03.GarageLogic
 
             if (!valid) 
             {
-                throw new FormatException("Fuel type invalid");
+                throw new ArgumentException("Fuel type invalid");
             }
 
             return fuelTypeAsEnum;
