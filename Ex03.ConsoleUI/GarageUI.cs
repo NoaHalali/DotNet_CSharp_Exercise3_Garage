@@ -11,6 +11,7 @@ namespace Ex03.ConsoleUI
     internal class GarageUI
     {
         private GarageSystem m_GarageSystem = new GarageSystem();
+        //private MessagesUI m_M
         private bool m_ProgramStillRunning = true;
 
         public void RunSystem()
@@ -183,7 +184,7 @@ namespace Ex03.ConsoleUI
 
             foreach (string requirement in keys)
             {
-                Console.WriteLine("Please enter {0}:", requirement);
+                Console.WriteLine("Please enter {0}:", requirement.ToLower());
                 value = Console.ReadLine();
                 NewVehicleRequirements[requirement] = value;
             }
