@@ -73,7 +73,6 @@ namespace Ex03.ConsoleUI
 
         private void activateAction(eUserAction i_ActionNumber)
         {
-
             switch (i_ActionNumber)
             {
                 case eUserAction.InsertNewVehicle:
@@ -251,12 +250,12 @@ namespace Ex03.ConsoleUI
             return userOptionNumber.Value;
         }
 
-        private List<string> getLicensesPlatesListByFilterOption(eUIGarageStateFilter filter)
+        private List<string> getLicensesPlatesListByFilterOption(eUIGarageStateFilter i_Filter)
         {
             List<string> LicensesPlatesList = null; //will alway be one of the cases here,
                                                     //filter validation is being checked before
 
-            switch (filter)
+            switch (i_Filter)
             {
                 case eUIGarageStateFilter.All:
                     {
@@ -347,6 +346,7 @@ namespace Ex03.ConsoleUI
                 string licensePlate = getLicensePlateFromUser();
                 float fuelAmountToAdd = getFuelAmountToAdd();
                 string fuelType = getFuelTypeAsString();
+
                 m_GarageSystem.AddFuelToVehicle(licensePlate, fuelAmountToAdd, fuelType);
                 Console.WriteLine("Charged fuel vehicle successfully.");
             }
@@ -372,13 +372,13 @@ namespace Ex03.ConsoleUI
 
         private float getValidFloatEnergyToAdd()
         {
-            
             bool isValid = false;
             float? fuelAmountToAdd = null;
 
             while (!isValid)
             {
                 string fuelAsString = Console.ReadLine();
+
                 isValid = float.TryParse(fuelAsString, out float tempfuelAmountToAdd);
                 if (isValid)
                 {
@@ -415,6 +415,7 @@ namespace Ex03.ConsoleUI
                 string licensePlate = getLicensePlateFromUser();
                 float electricityMinutesToAdd = getElectricityMinutesToAdd();
                 float electricityHoursToAdd = electricityMinutesToAdd / 60f;
+
                 m_GarageSystem.AddElectricityToVehicle(licensePlate, electricityHoursToAdd);
                 Console.WriteLine("Charge electric vehicle successfully.");
             }

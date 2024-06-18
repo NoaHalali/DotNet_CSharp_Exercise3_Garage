@@ -24,6 +24,7 @@ namespace Ex03.GarageLogic
                 return m_CurrentAirPressure;
             }
         }
+
         public float MaxtAirPressure
         {
             get
@@ -91,6 +92,5 @@ namespace Ex03.GarageLogic
 
             return stringToReturn;
         }
-
     }
 }

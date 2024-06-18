@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
             setCurrentFuelAmount(i_Requirements["Current Fuel Amount"]);
         }
 
-        public void setCurrentFuelAmount(string i_CurrentFuelAmount)
+        private void setCurrentFuelAmount(string i_CurrentFuelAmount)
         {
             if (float.TryParse(i_CurrentFuelAmount, out float currentFuelAmountFloat))
             {
@@ -59,9 +59,9 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string stringToReturn = string.Format("fuel type: {0}" + Environment.NewLine +
-                "{1}"
-                , m_FuelType.ToString(), base.ToString());
+            string stringToReturn = string.Format("fuel type: {0}" + 
+                Environment.NewLine + "{1}", 
+                m_FuelType.ToString(), base.ToString());
 
             return stringToReturn;
         }

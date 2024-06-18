@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     internal class Truck : Vehicle
     {
-        private bool m_IsCarryDangarousMaterials;
+        private bool m_IsCarryDangerousMaterials;
         private float m_CargoVolume;
         private const int k_WheelsNumber = 12;
         private const int k_MaxWheelAirPressure = 28;
@@ -23,26 +23,26 @@ namespace Ex03.GarageLogic
         protected override void AddRequirements()
         {
             base.AddRequirements();
-            m_Requirements.Add("Is Carry Dangarous Materials (yes/no)", null);
+            m_Requirements.Add("Is Carry Dangerous Materials (yes/no)", null);
             m_Requirements.Add("Cargo Volume", null);
         }
 
         public override void UpdateStateByRequirements()
         {
             base.UpdateStateByRequirements();
-            setIsCarryDangarousMaterials(m_Requirements["Is Carry Dangarous Materials (yes/no)"]);
+            setIsCarryDangerousMaterials(m_Requirements["Is Carry Dangerous Materials (yes/no)"]);
             setCargoVolume(m_Requirements["Cargo Volume"]);
         }
 
-        private void setIsCarryDangarousMaterials(string i_IsCarryDangarousMaterials)
+        private void setIsCarryDangerousMaterials(string i_IsCarryDangerousMaterials)
         {
-            if (i_IsCarryDangarousMaterials == "yes" || i_IsCarryDangarousMaterials == "no")
+            if (i_IsCarryDangerousMaterials == "yes" || i_IsCarryDangerousMaterials == "no")
             {
-                m_IsCarryDangarousMaterials = i_IsCarryDangarousMaterials == "yes";
+                m_IsCarryDangerousMaterials = i_IsCarryDangerousMaterials == "yes";
             }
             else
             {
-                throw new FormatException("Is carry dangarous materials need to be bool (yes/no)");
+                throw new FormatException("Is carry dangerous materials need to be bool (yes/no)");
             }
         }
 
@@ -61,10 +61,9 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string stringToReturn = string.Format("vehicle type: truck" + Environment.NewLine +
-                "is carry dangarous materials: {0}" + Environment.NewLine +
-                "cargo volume: {1}" + Environment.NewLine +
-                "{2}"
-                , m_IsCarryDangarousMaterials.ToString(), m_CargoVolume, base.ToString());
+                "is carry dangerous materials: {0}" + Environment.NewLine +
+                "cargo volume: {1}" + Environment.NewLine + "{2}",
+                 m_IsCarryDangerousMaterials.ToString(), m_CargoVolume, base.ToString());
 
             return stringToReturn;
         }

@@ -29,22 +29,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string OwnerName
-        {
-            get
-            {
-                return m_OwnerName;
-            }
-        }
-
-        public string OwnerPhoneNum
-        {
-            get
-            {
-                return m_OwnerPhoneNum;
-            }
-        }
-
         public eVehicleGarageState GarageState
         {
             get
@@ -67,8 +51,7 @@ namespace Ex03.GarageLogic
         {
             string stringToReturn = string.Format("Owner Name: {0}" + Environment.NewLine +
                 "owner phone number: {1}" + Environment.NewLine +
-                "vehicle garage state: {2}" + Environment.NewLine +
-                "{3}"
+                "vehicle garage state: {2}" + Environment.NewLine + "{3}"
                 , m_OwnerName, m_OwnerPhoneNum, m_GarageState.ToString(), m_ClientVehicle.ToString());
 
             return stringToReturn;

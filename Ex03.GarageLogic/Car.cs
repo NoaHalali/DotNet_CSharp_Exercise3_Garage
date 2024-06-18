@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Incorrect car color (only Yellow,White,Black,Red allowed)");
+                throw new ArgumentException("Incorrect car color (only Yellow, White, Black and Red allowed)");
             }
         }
 
@@ -92,19 +92,17 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Incorrect car doors number (only 2,3,4,5 allowed)");
+                throw new ArgumentException("Incorrect car doors number (only 2, 3, 4 and 5 allowed)");
             }
         }
 
         public override string ToString()
         {
-            string stringToReturn = string.Format("car color: {0}" + Environment.NewLine +
-                "car doors number: {1}" + Environment.NewLine +
-                "{2}"
-                , m_CarColor.ToString(), m_CarDoorsNumber.ToString(), base.ToString());
+            string stringToReturn = string.Format("car color: {0}" + Environment.NewLine + 
+                "car doors number: {1}" + Environment.NewLine + "{2}", 
+                 m_CarColor.ToString(), m_CarDoorsNumber.ToString(), base.ToString());
 
             return stringToReturn;
         }
-
     }
 }

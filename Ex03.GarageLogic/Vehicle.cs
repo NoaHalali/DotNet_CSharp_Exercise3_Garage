@@ -41,39 +41,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string Model
-        {
-            get
-            {
-                return m_Model;
-            }
-        }
-
         public string LicensePlate
         {
             get
             {
                 return m_LicensePlate;
-            }
-        }
-        
-        public float EnergyPrecentage
-        {
-            get
-            {
-                return m_EnergyPrecentage;
-            }
-            set 
-            { 
-                m_EnergyPrecentage = value;
-            }
-        }
-
-        public List<Wheel> Wheels
-        {
-            get
-            {
-                return m_Wheels;
             }
         }
 

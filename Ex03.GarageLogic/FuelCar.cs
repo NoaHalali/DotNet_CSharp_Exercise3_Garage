@@ -28,9 +28,8 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string stringToReturn = string.Format("vehicle type: fuel car" + Environment.NewLine +
-                "{0}"
-                , base.ToString());
+            string stringToReturn = string.Format("vehicle type: fuel car" + 
+                Environment.NewLine + "{0}", base.ToString());
 
             return stringToReturn;
         }

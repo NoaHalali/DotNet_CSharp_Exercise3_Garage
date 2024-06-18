@@ -38,6 +38,7 @@ namespace Ex03.GarageLogic
             setLicenseType(m_Requirements["License Type"]);
             setEngineVolume(m_Requirements["Engine Volume"]);
         }
+
         private void setLicenseType(string i_LicenseType)
         {
             if (i_LicenseType == "A")
@@ -58,7 +59,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Incorrect license type (only A,A1,AA,B1 allowed)");
+                throw new ArgumentException("Incorrect license type (only A, A1, AA and B1 allowed)");
             }
         }
 
@@ -76,10 +77,9 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string stringToReturn = string.Format("license type: {0}" + Environment.NewLine +
-                "engine volume: {1}" + Environment.NewLine +
-                "{2}"
-                , m_LicenseType.ToString(), m_EngineVolume, base.ToString());
+            string stringToReturn = string.Format("license type: {0}" + Environment.NewLine + 
+                "engine volume: {1}" + Environment.NewLine + "{2}",
+                 m_LicenseType.ToString(), m_EngineVolume, base.ToString());
 
             return stringToReturn;
         }

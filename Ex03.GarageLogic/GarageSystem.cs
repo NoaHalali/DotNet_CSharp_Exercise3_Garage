@@ -37,12 +37,12 @@ namespace Ex03.GarageLogic
         public List<string> GetLicensePlatesList()
         {
             List<string> licensePlatesList = new List<string>();
-            string licenstePlate;
+            string licensePlate;
 
             foreach (Client client in m_Clients)
             {
-                licenstePlate = client.GetLicensePlate();
-                licensePlatesList.Add(licenstePlate);
+                licensePlate = client.GetLicensePlate();
+                licensePlatesList.Add(licensePlate);
             }
 
             return licensePlatesList;
@@ -96,8 +96,8 @@ namespace Ex03.GarageLogic
             FuelEngine.eFuelType fuelTypeAsEnum = parseFuelType(i_FuelType);
             Client currentClient = getClient(i_LicensePlate);
             Vehicle currentVehicle = currentClient.ClientVehicle;
-
             FuelEngine vehicleFuelEngine = currentVehicle.Engine as FuelEngine;
+
             if (vehicleFuelEngine == null)
             {
                 throw new ArgumentException("The vehicle you enterd not fuel type");
@@ -110,8 +110,8 @@ namespace Ex03.GarageLogic
         {
             Client currentClient = getClient(i_LicensePlate);
             Vehicle currentVehicle = currentClient.ClientVehicle;
-
             ElectricEngine vehicleElectricEngine = currentVehicle.Engine as ElectricEngine;
+
             if (vehicleElectricEngine == null)
             {
                 throw new ArgumentException("The vehicle you enterd not electric type");
@@ -153,19 +153,11 @@ namespace Ex03.GarageLogic
             return fuelTypeAsEnum;
         }
 
-        public void FillEnergy()
-        {
-            //vechicle class function, will be virtual and inheriters will override it
-        }
-
         public string GetClientData(string i_LicensePlate)
         {
             Client currentClient = getClient(i_LicensePlate);
             
             return currentClient.ToString();
         }
-
-
-
     }
 }
