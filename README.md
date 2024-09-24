@@ -1,6 +1,6 @@
 C# Garage Management System
 
-Developed a comprehensive Garage Management System in C# using an object-oriented approach. The system features a range of classes, including Vehicle, Engine, Car, Motorcycle, and Truck, along with enums for various attributes like fuel types and vehicle states. The application supports vehicle tracking, customer management, and service scheduling with real-time data updates and efficient error handling.
+A comprehensive Garage Management System in C# using an object-oriented approach. The system features a range of classes, including Vehicle, Engine, Car, Motorcycle, and Truck, along with enums for various attributes like fuel types and vehicle states. The application supports vehicle tracking, customer management, and service scheduling with real-time data updates and efficient error handling.
 
 Key components include:
 
